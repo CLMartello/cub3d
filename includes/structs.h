@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 16:01:43 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/02/26 16:15:08 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/02/26 17:53:44 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 
 typedef struct s_img
 {
-	int		floor[3]; //array with RGB values. Same for ceiling
-	int		ceiling[3];
+	char	floor[3]; //array with RGB values. Same for ceiling
+	char	ceiling[3];
 	char	*n_wall; //path-to-texture. Same for the following
 	char	*s_wall;
 	char	*e_wall;
