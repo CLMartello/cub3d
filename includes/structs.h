@@ -32,6 +32,8 @@ typedef struct s_game
 	char	**map;
 	char	player; //player initial orientation, i.e. N,S,E or W
 	t_img	textures; //struct to hold the images
+	void	*mlx;
+	void	*win;
 }	t_game;
 
 #endif
