@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 16:01:43 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/09 15:20:00 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/03/09 19:30:43 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_player
 	float	angle;
 
 	bool	key_up;
-	bool	key_donw;
+	bool	key_down;
 	bool	key_left;
 	bool	key_right;
 
@@ -46,7 +46,7 @@ typedef struct s_game
 	int			endian;
 	t_player	player;
 
-	char		*map;
+	char		**map;
 }	t_game;
 
 #endif

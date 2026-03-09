@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 19:16:07 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/09 15:23:45 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/03/09 17:47:25 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@
 # include <stdbool.h>
 # include <stdlib.h>
 # include <stdio.h>
-# include "structs.h"
+# include "game.h"
 
 #endif
