@@ -6,11 +6,11 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 17:54:22 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/09 18:49:06 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/03/09 19:55:40 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/cub3d.h"
+#include "../includes/cub3d.h"
 
 void	init_player(t_player *player)
 {

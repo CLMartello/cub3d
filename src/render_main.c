@@ -6,11 +6,11 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 19:10:08 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/09 19:32:34 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/03/09 19:55:44 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/cub3d.h"
+#include "../includes/cub3d.h"
 
 void	put_pixel(int x, int y, int color, t_game *game)
 {
