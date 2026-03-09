@@ -6,34 +6,47 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 16:01:43 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/02 19:26:46 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/03/09 15:20:00 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
+# include "cub3d.h"
+
 /* ************************************************************************** */
 /*                                  Structs                                   */
 /* ************************************************************************** */
 
-typedef struct s_img
+typedef struct s_player
 {
-	char	floor[3]; //array with RGB values. Same for ceiling
-	char	ceiling[3];
-	char	*n_wall; //path-to-texture. Same for the following
-	char	*s_wall;
-	char	*e_wall;
-	char	*w_wall;
-}	t_img;
+	float	x;
+	float	y;
+	float	angle;
+
+	bool	key_up;
+	bool	key_donw;
+	bool	key_left;
+	bool	key_right;
+
+	bool	left_rotate;
+	bool	right_rotate;
+}	t_player;
 
 typedef struct s_game
 {
-	char	**map;
-	char	player; //player initial orientation, i.e. N,S,E or W
-	t_img	textures; //struct to hold the images
-	void	*mlx;
-	void	*win;
+	void		*mlx;
+	void		*win;
+	void		*img;
+
+	char		*data;
+	int			bpp;
+	int			size_line;
+	int			endian;
+	t_player	player;
+
+	char		*map;
 }	t_game;
 
 #endif
