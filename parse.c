@@ -1,21 +1,5 @@
 
-#include "structs.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <fcntl.h>
-
-/*int	*parse_rgb(char *rgb)
-{
-	int i = 0;
-
-	while (rgb[i] != '\0')
-	{
-		if (rgb )
-	}
-}*/
-
-
+#include "../includes/cub3d.h"
 
 void	valid_map(char *map)
 {
@@ -36,26 +20,38 @@ void	valid_map(char *map)
 int	*parse_rgb(char *line)
 {
 	int	i;
-	int	r;
-	int	g;
-	int	b;
-	int	rgb[3];
+	int	j;
+	int	n;
+	int	*rgb;
 
 	i = 0;
-	while (line[i] != '\0')
+	j = 0;
+	rgb = malloc(3 * sizeof(int));
+	if (!rgb)
+		return (NULL);
+	while (line[i] != '\0' && j < 3)
 	{
-		if (line[i] == ' ')
+		if (line[i] == ' ' || line[i] == ',')
 			i++;
 		if (line[i] >= '0' && line[i] <= '9')
-			r = atoi(line + i);
-			if (r >= 0 && r <= 255)
-		if (line[i] == ',')
-			i++;
-				
+		{
+			n = atoi(line + i);
+			if (n >= 0 && n <= 255)
+			{
+				rgb[j] = n;
+				j++;
+				n = -1;	
+			}
+	                while (line[i] >= '0' && line[i] <= '9')
+                        i++;
+
+		}
+		else
+			return (NULL);
 	}
-	rgb[0] = r;
-	rgb[1] = g;
-	rgb[2] = b;
+	printf("R   founded: %d\n", rgb[0]);
+	printf(" G  founded: %d\n", rgb[1]);
+	printf("  B founded: %d\n", rgb[2]);
 	return (rgb);
 }
 
@@ -70,7 +66,7 @@ char	*parse_texture(char *line)
 	{
 		if (line[i] == '.' && line[i + 1] == '/')
 		{
-			texture = strdup(line + i);
+			texture = get_texture(line + i);
 			printf ("Texture founded: %s\n", texture);
 			return (texture);
 		}
@@ -79,15 +75,11 @@ char	*parse_texture(char *line)
 	return (texture);
 }
 
-void	*verify_parse(char *line)
+void	*verify_parse(char *line, t_img *img)
 {
 	int	i;
-	t_img	*img;
 
 	i = 0;
-	img = malloc(sizeof(t_img));
-	if (!img)
-		return (NULL);
 	while (line[i] != '\0')
 	{
 		if (line[i] == 'N' && line[i + 1] == 'O')
@@ -99,9 +91,9 @@ void	*verify_parse(char *line)
 		else if (line[i] == 'E' && line[i + 1] == 'A')
 			return (img->e_wall = parse_texture(line));
 		else if (line[i] == 'F')
-			return (img->floor = parse_rgb(line));
+			return (img->floor = parse_rgb(line + 1));
 		else if (line[i] == 'C')
-			return (img->ceiling = parse_rgb(line));
+			return (img->ceiling = parse_rgb(line + 1));
 		i++;
 	}
 	return (NULL);
@@ -111,17 +103,19 @@ int	parse_cub_file(char *file)
 {
 	int	fd;
 	char	*line;
+        t_img   *img;
 
 	fd = -1;
 	line = NULL;
-	//open cub file
+        img = malloc(sizeof(t_img));
+        if (!img)
+                return (1);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		printf("Unable to read .cub file.\n");
-	
 	while ((line = get_next_line(fd)))
 	{
-		verify_parse(line);
+		verify_parse(line, img);
 		free(line);
 	}
 	return (0);

@@ -1,8 +1,5 @@
 
-#include "structs.h"
-#include <stdio.h>
-#include <fcntl.h>
-#include <string.h>
+#include "../includes/cub3d.h"
 
 int	main(int argc, char **argv)
 {

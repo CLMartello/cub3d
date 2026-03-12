@@ -6,11 +6,11 @@
 /*   By: clumertz <clumertz@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 15:56:59 by clumertz          #+#    #+#             */
-/*   Updated: 2026/03/10 20:17:18 by clumertz         ###   ########.fr       */
+/*   Updated: 2026/03/12 19:27:21 by clumertz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "structs.h"
+#include "../includes/cub3d.h"
 
 static int	new_line(char *line)
 {
