@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 15:19:08 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/09 17:47:03 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/03/12 20:05:03 by clumertz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,22 @@
 /*                                  Test Func                                 */
 /* ************************************************************************** */
 
+/*
 void init_player(t_player *player);
 int key_release(int keycode, t_player *player);
 int key_press(int keycode, t_player *player);
-void move_player(t_player *player);
+void move_player(t_player *player);*/
+
+/* ************************************************************************** */
+/*                                  Parser Func                                 */
+/* ************************************************************************** */
+
+int     parse_cub_file(char *file);
+void    *verify_parse(char *line, t_img *img);
+char    *parse_texture(char *line);
+int     *parse_rgb(char *line);
+void    valid_map(char *map);
+char    *get_next_line(int fd);
+char    *get_texture(char *str);
 
 #endif
