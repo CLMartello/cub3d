@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: clumertz <clumertz@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 16:01:43 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/12 19:05:20 by clumertz         ###   ########.fr       */
+/*   Updated: 2026/03/21 19:13:40 by clumertz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,26 @@
 
 # include "cub3d.h"
 
+enum e_erro_identifier
+{
+	ERR_OPEN = 1,
+	ERR_MALLOC,
+	ERR_ACCESS,
+	ERR_RGB,
+	ERR_MAP,
+};
+
 /* ************************************************************************** */
 /*                                  Structs                                   */
 /* ************************************************************************** */
+
+typedef struct s_map
+{
+	int		height;
+	char	**grid;
+	int		*player_position;
+	char	player_orientation;
+}		t_map;
 
 typedef struct s_img
 {
@@ -25,8 +42,9 @@ typedef struct s_img
 	char	*s_wall;
 	char	*w_wall;
 	char	*e_wall;
-	int	*floor;
-	int	*ceiling;
+	int		*floor;
+	int		*ceiling;
+	t_map	*map;
 }		t_img;
 
 typedef struct s_player

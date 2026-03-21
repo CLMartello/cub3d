@@ -1,16 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   str_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: clumertz <clumertz@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 18:36:42 by clumertz          #+#    #+#             */
-/*   Updated: 2026/03/12 19:50:20 by clumertz         ###   ########.fr       */
+/*   Updated: 2026/03/21 17:58:13 by clumertz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+int	ft_isspace(char c)
+{
+	if (c == ' ' || c == '\t')
+		return (1);
+	else
+		return (0);
+}
 
 static int	tex_strlen(char *s)
 {
@@ -22,16 +30,16 @@ static int	tex_strlen(char *s)
 	return (i);
 }
 
-char	*get_texture(char *str)
+char	*get_line(char *str)
 {
-	int	i;
-	int	len;
+	int		i;
+	int		len;
 	char	*dest;
 
 	len = tex_strlen(str);
 	dest = malloc(len * sizeof(char) + 1);
 	if (!dest)
-		return (0);
+		ft_error(NULL, ERR_MALLOC);
 	i = 0;
 	while (i < len)
 	{

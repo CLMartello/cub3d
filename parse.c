@@ -1,126 +1,84 @@
 
 #include "../includes/cub3d.h"
 
-void	valid_map(char *map)
+void	start_map(char *line, t_img *img)
 {
-	int	i;
+	char	**new_map;
+	int		i;
 
+	new_map = malloc(sizeof(char *) * (img->map->height + 2));
+	if (!new_map)
+		//funcao para liberar map
+		return ;
 	i = 0;
-	while (map[i] != '\0')
+	if (img->map->grid)
 	{
-		if (map[i] == '1' || map[i] == '0')
-			i++;
-		if (map[i] == 'N' || map[i] == 'E' || map[i] == 'S' || map[i] == 'W')
-			i++;
-		else
-			printf("Map not valid.\n");
-	}
-}
-
-int	*parse_rgb(char *line)
-{
-	int	i;
-	int	j;
-	int	n;
-	int	*rgb;
-
-	i = 0;
-	j = 0;
-	rgb = malloc(3 * sizeof(int));
-	if (!rgb)
-		return (NULL);
-	while (line[i] != '\0' && j < 3)
-	{
-		if (line[i] == ' ' || line[i] == ',')
-			i++;
-		if (line[i] >= '0' && line[i] <= '9')
+		while (img->map->grid[i])
 		{
-			n = atoi(line + i);
-			if (n >= 0 && n <= 255)
-			{
-				rgb[j] = n;
-				j++;
-				n = -1;	
-			}
-	                while (line[i] >= '0' && line[i] <= '9')
-                        i++;
-
+			new_map[i] = img->map->grid[i];
+			i++;
 		}
-		else
-			return (NULL);
 	}
-	printf("R   founded: %d\n", rgb[0]);
-	printf(" G  founded: %d\n", rgb[1]);
-	printf("  B founded: %d\n", rgb[2]);
-	return (rgb);
+	new_map[img->map->height] = get_line(line);
+	new_map[img->map->height + 1] = NULL;
+	if (img->map->grid)
+		free(img->map->grid);
+	img->map->grid = new_map;
+	img->map->height++;
 }
 
-char	*parse_texture(char *line)
-{
-	int	i;
-	char	*texture;
-
-	i = 0;
-	texture = NULL;
-	while (line[i] != '\0')
-	{
-		if (line[i] == '.' && line[i + 1] == '/')
-		{
-			texture = get_texture(line + i);
-			printf ("Texture founded: %s\n", texture);
-			return (texture);
-		}
-		i++;
-	}
-	return (texture);
-}
-
-void	*verify_parse(char *line, t_img *img)
+void	valid_map(char *line, t_img *img)
 {
 	int	i;
 
 	i = 0;
 	while (line[i] != '\0')
 	{
-		if (line[i] == 'N' && line[i + 1] == 'O')
-			return (img->n_wall = parse_texture(line));
-		else if (line[i] == 'S' && line[i + 1] == 'O')
-			return (img->s_wall = parse_texture(line));
-		else if (line[i] == 'W' && line[i + 1] == 'E')
-			return (img->w_wall = parse_texture(line));
-		else if (line[i] == 'E' && line[i + 1] == 'A')
-			return (img->e_wall = parse_texture(line));
-		else if (line[i] == 'F')
-			return (img->floor = parse_rgb(line + 1));
-		else if (line[i] == 'C')
-			return (img->ceiling = parse_rgb(line + 1));
-		i++;
+		while (ft_isspace(line[i]) == 1)
+			i++;
+		if (line[i] == '1' || line[i] == '0')
+			i++;
+		else if (line[i] == 'N' || line[i] == 'E'
+			|| line[i] == 'S' || line[i] == 'W')
+			i++;
+		else if (line[i] == '\n')
+			break ;
+		else
+		{
+			printf("Map not valid: %s", line);
+			free(line);
+			ft_error(img, ERR_MAP);
+			break ;
+		}
 	}
-	return (NULL);
+	start_map(line, img);
 }
 
 int	parse_cub_file(char *file)
 {
-	int	fd;
+	int		fd;
 	char	*line;
-        t_img   *img;
+	t_img	*img;
 
 	fd = -1;
 	line = NULL;
-        img = malloc(sizeof(t_img));
-        if (!img)
-                return (1);
+	img = init_struct();
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		printf("Unable to read .cub file.\n");
-	while ((line = get_next_line(fd)))
+		ft_error(img, ERR_OPEN);
+	line = get_next_line(fd);
+	while (line)
 	{
-		verify_parse(line, img);
+		if (is_map(line) == 0)
+			//parse_texture(line, img);
+			verify_conf(line, img);
+		else if (is_map(line) == 1)
+			valid_map(line, img);
 		free(line);
+		line = get_next_line(fd);
 	}
+	free(line);
+	print_map(img->map->grid);
+	free_all(img);
 	return (0);
-	//read cub file
-	//store lines properly
-	//verify and check .cub extension
-
 }

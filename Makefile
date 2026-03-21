@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+         #
+#    By: clumertz <clumertz@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/26 15:24:18 by adpinhei          #+#    #+#              #
-#    Updated: 2026/03/12 19:53:43 by clumertz         ###   ########.fr        #
+#    Updated: 2026/03/21 17:04:57 by clumertz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ BUILD_DIR := build
 ###############################################################################
 #                               Source Files                                  #
 ###############################################################################
-SRC_FILES := parse.c main.c get_next_line.c str_utils.c
+SRC_FILES := parse.c main.c get_next_line.c str_utils.c error.c init.c parse_map.c parse_conf.c 
 
 ###############################################################################
 #                               Object Files                                  #
