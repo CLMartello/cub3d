@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 15:19:08 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/09 17:47:03 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/03/23 14:59:42 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define GAME_H
 
 # include "structs.h"
+# include "cub3d.h"
 
 /* ************************************************************************** */
 /*                                  Macros                                    */
@@ -37,9 +38,6 @@
 /*                                  Test Func                                 */
 /* ************************************************************************** */
 
-void init_player(t_player *player);
-int key_release(int keycode, t_player *player);
-int key_press(int keycode, t_player *player);
-void move_player(t_player *player);
+
 
 #endif
