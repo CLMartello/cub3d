@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 16:17:27 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/24 16:33:26 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/03/24 17:19:47 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static void	draw_square(t_game *game, int color, int size, int x, int y);
 static void	draw_map(t_game *game);
-static void	draw_line(t_player *player, t_game *game, float start_x);
+static void	draw_line(t_player *player, t_game *game, float start_x, int i);
 
 int	draw_loop(t_game *game)
 {
@@ -36,7 +36,7 @@ int	draw_loop(t_game *game)
 	i = 0;
 	while (i < WIDTH)
 	{
-		draw_line(player, game, start_x);
+		draw_line(player, game, start_x, i);
 		start_x += fraction;
 		i++;
 	}
@@ -46,6 +46,7 @@ int	draw_loop(t_game *game)
 
 static void	draw_square(t_game *game, int color, int size, int x, int y)
 {
+	return ; //comment
 	for (int i = 0; i < size; i++)
 		put_pixel(game, x + i, y, color);
 	for (int i = 0; i < size; i++)
@@ -58,6 +59,7 @@ static void	draw_square(t_game *game, int color, int size, int x, int y)
 
 static void	draw_map(t_game *game)
 {
+	return ; //comment
 	int	color;
 	int	x;
 	int	y;
@@ -75,7 +77,12 @@ static void	draw_map(t_game *game)
 	}
 }
 
-static void	draw_line(t_player *player, t_game *game, float start_x)
+float	distance(float x, float y)
+{
+	return (sqrt(x * x + y * y));
+}
+
+static void	draw_line(t_player *player, t_game *game, float start_x, int i)
 {
 	float	cos_angle;
 	float	sin_angle;
@@ -88,8 +95,17 @@ static void	draw_line(t_player *player, t_game *game, float start_x)
 	ray_y = player->y;
 	while (!touch(ray_x, ray_y, game))
 	{
-		put_pixel(game, ray_x, ray_y, 0xFF0000);
+	//	put_pixel(game, ray_x, ray_y, 0xFF0000);
 		ray_x += cos_angle;
 		ray_y += sin_angle;
+	}
+	float	dist = distance(ray_x - player->x, ray_y - player->y);
+	float	height = (BLOCK / dist) * (WIDTH / 2);
+	int		start_y = (HEIGHT - height) / 2;
+	int		end = start_y + height;
+	while (start_y < end)
+	{
+		put_pixel(game, i, start_y, 0x0000FF);
+		start_y++;
 	}
 }

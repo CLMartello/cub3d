@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 16:06:33 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/24 16:30:23 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/03/24 16:46:07 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	move_player(t_player *player)
 	float	cos_angle;
 	float	sin_angle;
 
-	speed = 5;
-	angle_speed = 0.1;
+	speed = 3;
+	angle_speed = 0.03;
 	cos_angle = cos(player->angle);
 	sin_angle = sin(player->angle);
 	if (player->left_rotate)

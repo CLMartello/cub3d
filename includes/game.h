@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 15:19:08 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/24 16:26:50 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/03/24 17:05:47 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 /*                                  Macros                                    */
 /* ************************************************************************** */
 
-# define WIDTH 1280
-# define HEIGHT 720
-# define BLOCK 64
+# define WIDTH 816 //BLOCK * map_size
+# define HEIGHT 528 // BLOCK * map_length
+# define BLOCK 48
 
 # define PI 3.14159265359
 
