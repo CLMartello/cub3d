@@ -6,7 +6,7 @@
 #    By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/26 15:24:18 by adpinhei          #+#    #+#              #
-#    Updated: 2026/03/23 15:00:25 by adpinhei         ###   ########.fr        #
+#    Updated: 2026/03/24 15:17:20 by adpinhei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,7 +71,7 @@ leak: CFLAGS += -fsanitize=address,undefined -g
 ###############################################################################
 .PHONY: all clean fclean re valgrind norm gdb leak
 
-all: $(BUILD_DIR) $(MLX_LIB) $(NAME)
+all: $(VALGRINDRC) $(BUILD_DIR) $(MLX_LIB) $(NAME)
 
 ###############################################################################
 #                               Create ./build                                #
@@ -114,6 +114,7 @@ valgrind: $(NAME)
 	--track-origins=yes \
 	--trace-children=yes \
 	--track-fds=yes \
+	--suppressions=mlx.supp \
 	./$(NAME) $(PARAM)
 
 gdb: $(NAME)

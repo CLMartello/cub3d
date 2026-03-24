@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 15:19:08 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/23 14:59:42 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/03/24 13:43:41 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,6 @@
 # define HEIGHT 720
 # define BLOCK 64
 # define DEBUG 0
-
-# define W 119
-# define A 97
-# define S 115
-# define D 100
-# define LEFT 65361
-# define RIGHT 65363
 
 # define PI 3.14159265359
 

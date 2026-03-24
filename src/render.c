@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 15:00:35 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/23 17:43:12 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/03/24 15:21:02 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	move_player(t_player *player)
 	if (player->angle > 2 * PI)
 		player->angle = 0;
 	if (player->angle < 0)
-		player->angle = PI;
+		player->angle = 2 * PI;
 	if (player->key_up)
 	{
 		player->x += cos_angle * speed;
@@ -44,13 +44,13 @@ void	move_player(t_player *player)
 	}
 	if (player->key_left)
 	{
-		player->x += cos_angle * speed;
-		player->y -= sin_angle * speed;
+		player->x += sin_angle * speed;
+		player->y -= cos_angle * speed;
 	}
 	if (player->key_right)
 	{
-		player->x -= cos_angle * speed;
-		player->y += sin_angle * speed;
+		player->x -= sin_angle * speed;
+		player->y += cos_angle * speed;
 	}
 }
 
@@ -69,36 +69,41 @@ void	init_player(t_player *player)
 	player->right_rotate = false;
 }
 
-int	key_press(int keycode, t_player *player)
+int	key_press(int keycode, t_game *game)
 {
-	if (keycode == W)
+	t_player	*player;
+
+	player = &game->player;
+	if (keycode == XK_Escape)
+		mlx_loop_end(game->mlx);
+	if (keycode == XK_W || keycode == XK_w)
 		player->key_up = true;
-	if (keycode == S)
+	if (keycode == XK_S || keycode == XK_s)
 		player->key_down = true;
-	if (keycode == A)
+	if (keycode == XK_A || keycode == XK_a)
 		player->key_left = true;
-	if (keycode == D)
+	if (keycode == XK_D || keycode == XK_d)
 		player->key_right = true;
-	if (keycode == LEFT)
+	if (keycode == XK_Left)
 		player->left_rotate = true;
-	if (keycode == RIGHT)
+	if (keycode == XK_Right)
 		player->right_rotate = true;
 	return 0;
 }
 
 int	key_release(int keycode, t_player *player)
 {
-	if (keycode == W)
+	if (keycode == XK_W || keycode == XK_w)
 		player->key_up = false;
-	if (keycode == S)
+	if (keycode == XK_S || keycode == XK_s)
 		player->key_down = false;
-	if (keycode == A)
+	if (keycode == XK_A || keycode == XK_a)
 		player->key_left = false;
-	if (keycode == D)
+	if (keycode == XK_D || keycode == XK_d)
 		player->key_right = false;
-	if (keycode == LEFT)
+	if (keycode == XK_Left)
 		player->left_rotate = false;
-	if (keycode == RIGHT)
+	if (keycode == XK_Right)
 		player->right_rotate = false;
 	return 0;
 }
@@ -152,11 +157,11 @@ char	**get_map(void)
 	map[0] = "11111111111111111";
 	map[1] = "10000000000000001";
 	map[2] = "10000000000000001";
-	map[3] = "10000000000000001";
-	map[4] = "10000000000000001";
-	map[5] = "10000000000000001";
-	map[6] = "10000000000000001";
-	map[7] = "10000000000000001";
+	map[3] = "10000010000000001";
+	map[4] = "10010000000000001";
+	map[5] = "10000000100100001";
+	map[6] = "10000000100100001";
+	map[7] = "10001000101100001";
 	map[8] = "10000000000000001";
 	map[9] = "11111111111111111";
 	map[10] = NULL;
@@ -200,6 +205,21 @@ bool	touch(float px, float py, t_game *game)
 	return (false);
 }
 
+void	draw_line(t_player *player, t_game *game, float start_x)
+{
+	float	cos_angle = cos(start_x);
+	float	sin_angle = sin(start_x);
+	float	ray_x = player->x;
+	float	ray_y = player->y;
+
+	while (!touch(ray_x, ray_y, game))
+	{
+		put_pixel(game, ray_x, ray_y, 0xFF0000);
+		ray_x += cos_angle;
+		ray_y += sin_angle;
+	}
+}
+
 int	draw_loop(t_game *game)
 {
 	t_player	*player;
@@ -211,17 +231,23 @@ int	draw_loop(t_game *game)
 	clear_image(game);
 	draw_square(game, 0x00FF00, 10, player->x, player->y);
 	draw_map(game);
-	float	ray_x = player->x;
-	float	ray_y = player->y;
-	float	cos_angle = cos(player->angle);
-	float	sin_angle = sin(player->angle);
-	while (!touch(ray_x, ray_y, game))
+	float	fraction = PI / 3 / WIDTH;
+	float	start_x = player->angle - PI / 6;
+	int		i = 0;
+	while (i < WIDTH)
 	{
-		put_pixel(game, ray_x, ray_y, 0xFF0000);
-		ray_x += cos_angle;
-		ray_y += sin_angle;
+		draw_line(player, game, start_x);
+		start_x += fraction;
+		i++;
 	}
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
+	return 0;
+}
+
+int	ft_exitgame(t_game *game)
+{
+	if (game && game->mlx)
+		mlx_loop_end(game->mlx);
 	return 0;
 }
 
@@ -230,9 +256,17 @@ int	main(void)
 	t_game	game;
 
 	init_game(&game);
-	mlx_hook(game.win, 2, 1L<<0, key_press, &game.player);
-	mlx_hook(game.win, 3, 1L<<1, key_release, &game.player);
+	mlx_hook(game.win, DestroyNotify, NoEventMask, &ft_exitgame, &game);
+	mlx_hook(game.win, KeyPress, KeyPressMask, key_press, &game);
+	mlx_hook(game.win, KeyRelease, KeyReleaseMask, key_release, &game.player);
 	mlx_loop_hook(game.mlx, draw_loop, &game);
 	mlx_loop(game.mlx);
+	int	i = 0;
+	while (game.map[i] != NULL)
+	{
+		free(game.map[i]);
+		i++;
+	}
+	free(game.map);
 	return 0;
 }
