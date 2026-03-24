@@ -6,7 +6,7 @@
 /*   By: clumertz <clumertz@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 16:01:43 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/21 19:13:40 by clumertz         ###   ########.fr       */
+/*   Updated: 2026/03/24 21:29:00 by clumertz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,14 @@ enum e_erro_identifier
 	ERR_MAP,
 };
 
+enum e_player_orientation_identifier
+{
+	NORTH = 1,
+	SOUTH,
+	WEST,
+	EAST,
+};
+
 /* ************************************************************************** */
 /*                                  Structs                                   */
 /* ************************************************************************** */
@@ -32,8 +40,9 @@ typedef struct s_map
 {
 	int		height;
 	char	**grid;
-	int		*player_position;
-	char	player_orientation;
+	int		player_x;
+	int		player_y;
+	int		player_orientation;
 }		t_map;
 
 typedef struct s_img
@@ -46,35 +55,5 @@ typedef struct s_img
 	int		*ceiling;
 	t_map	*map;
 }		t_img;
-
-typedef struct s_player
-{
-	float	x;
-	float	y;
-	float	angle;
-
-	bool	key_up;
-	bool	key_down;
-	bool	key_left;
-	bool	key_right;
-
-	bool	left_rotate;
-	bool	right_rotate;
-}	t_player;
-
-typedef struct s_game
-{
-	void		*mlx;
-	void		*win;
-	void		*img;
-
-	char		*data;
-	int			bpp;
-	int			size_line;
-	int			endian;
-	t_player	player;
-
-	char		**map;
-}	t_game;
 
 #endif

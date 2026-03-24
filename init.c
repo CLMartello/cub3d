@@ -5,7 +5,9 @@ void	init_map(t_map *map)
 {
 	map->height = 0;
 	map->grid = NULL;
-	map->player_position = NULL;
+	map->player_orientation = -1;
+	map->player_x = -1;
+	map->player_y = -1;
 }
 
 void	init_img(t_img *img)

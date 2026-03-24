@@ -8,8 +8,7 @@ void	start_map(char *line, t_img *img)
 
 	new_map = malloc(sizeof(char *) * (img->map->height + 2));
 	if (!new_map)
-		//funcao para liberar map
-		return ;
+		ft_error(img, ERR_MALLOC);
 	i = 0;
 	if (img->map->grid)
 	{
@@ -40,15 +39,17 @@ void	valid_map(char *line, t_img *img)
 			i++;
 		else if (line[i] == 'N' || line[i] == 'E'
 			|| line[i] == 'S' || line[i] == 'W')
+		{
+			verify_player(line[i], img);
+			img->map->player_x = i;
 			i++;
+		}
 		else if (line[i] == '\n')
 			break ;
 		else
 		{
-			printf("Map not valid: %s", line);
 			free(line);
 			ft_error(img, ERR_MAP);
-			break ;
 		}
 	}
 	start_map(line, img);
@@ -70,7 +71,6 @@ int	parse_cub_file(char *file)
 	while (line)
 	{
 		if (is_map(line) == 0)
-			//parse_texture(line, img);
 			verify_conf(line, img);
 		else if (is_map(line) == 1)
 			valid_map(line, img);
@@ -78,7 +78,8 @@ int	parse_cub_file(char *file)
 		line = get_next_line(fd);
 	}
 	free(line);
-	print_map(img->map->grid);
+	verify_map(img);
+	//rendering(img);
 	free_all(img);
 	return (0);
 }

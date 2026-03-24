@@ -39,7 +39,6 @@ void	parse_rgb(char *line, int *rgb)
 		else
 			return ;
 	}
-	printf("R: %d, G: %d, B: %d\n", rgb[0], rgb[1], rgb[2]);
 }
 
 void	parse_texture(char *line, t_img *img)
@@ -63,9 +62,6 @@ void	parse_texture(char *line, t_img *img)
 		img->w_wall = path;
 	else if (line[0] == 'E')
 		img->e_wall = path;
-	//else
-	//	free(path);
-	printf ("Texture founded: %s\n", path);
 }
 
 void	verify_conf(char *line, t_img *img)

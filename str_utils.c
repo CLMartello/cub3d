@@ -6,7 +6,7 @@
 /*   By: clumertz <clumertz@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 18:36:42 by clumertz          #+#    #+#             */
-/*   Updated: 2026/03/21 17:58:13 by clumertz         ###   ########.fr       */
+/*   Updated: 2026/03/24 21:26:31 by clumertz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	tex_strlen(char *s)
 	int	i;
 
 	i = 0;
-	while (s[i] != '\0' && s[i] != '\n' && s[i] != ' ')
+	while (s[i] != '\0' && s[i] != '\n')
 		i++;
 	return (i);
 }

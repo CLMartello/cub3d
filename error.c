@@ -18,8 +18,6 @@ void	free_map(t_map *map)
 {
 	if (map->grid)
 		free_db_str(map->grid);
-	if (map->player_position)
-		free(map->player_position);
 	free(map);
 }
 
