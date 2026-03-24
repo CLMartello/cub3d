@@ -6,7 +6,7 @@
 #    By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/26 15:24:18 by adpinhei          #+#    #+#              #
-#    Updated: 2026/03/24 15:17:20 by adpinhei         ###   ########.fr        #
+#    Updated: 2026/03/24 15:40:52 by adpinhei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -112,8 +112,6 @@ valgrind: $(NAME)
 	@valgrind --leak-check=full \
 	--show-leak-kinds=all \
 	--track-origins=yes \
-	--trace-children=yes \
-	--track-fds=yes \
 	--suppressions=mlx.supp \
 	./$(NAME) $(PARAM)
 

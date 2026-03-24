@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 15:00:35 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/24 15:21:02 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/03/24 16:03:08 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,12 +261,6 @@ int	main(void)
 	mlx_hook(game.win, KeyRelease, KeyReleaseMask, key_release, &game.player);
 	mlx_loop_hook(game.mlx, draw_loop, &game);
 	mlx_loop(game.mlx);
-	int	i = 0;
-	while (game.map[i] != NULL)
-	{
-		free(game.map[i]);
-		i++;
-	}
 	free(game.map);
 	return 0;
 }
