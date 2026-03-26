@@ -55,15 +55,13 @@ void	valid_map(char *line, t_img *img)
 	start_map(line, img);
 }
 
-int	parse_cub_file(char *file)
+void	parse_cub_file(char *file, t_img *img)
 {
 	int		fd;
 	char	*line;
-	t_img	*img;
 
 	fd = -1;
 	line = NULL;
-	img = init_struct();
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		ft_error(img, ERR_OPEN);
@@ -80,6 +78,5 @@ int	parse_cub_file(char *file)
 	free(line);
 	verify_map(img);
 	//rendering(img);
-	free_all(img);
-	return (0);
+	//free_all(img);
 }

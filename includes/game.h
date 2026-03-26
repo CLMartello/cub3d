@@ -6,7 +6,7 @@
 /*   By: clumertz <clumertz@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 15:19:08 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/26 18:31:21 by clumertz         ###   ########.fr       */
+/*   Updated: 2026/03/26 18:42:23 by clumertz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ bool	touch(float px, float py, t_game *game);
 /*                                  Parser Func                               */
 /* ************************************************************************** */
 
-int		parse_cub_file(char *file);
+void	parse_cub_file(char *file, t_img *img);
 void	valid_map(char *line, t_img *img);
 void	start_map(char *line, t_img *img);
 void	init_map(t_map *map);

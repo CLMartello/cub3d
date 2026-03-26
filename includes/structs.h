@@ -6,7 +6,7 @@
 /*   By: clumertz <clumertz@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 16:01:43 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/26 18:32:32 by clumertz         ###   ########.fr       */
+/*   Updated: 2026/03/26 18:45:33 by clumertz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ typedef struct s_img
 	int		*ceiling;
 	t_map	*map;
 }		t_img;
-
 
 typedef struct s_player
 {
