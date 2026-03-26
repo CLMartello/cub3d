@@ -6,7 +6,7 @@
 /*   By: clumertz <clumertz@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 15:19:08 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/26 18:42:23 by clumertz         ###   ########.fr       */
+/*   Updated: 2026/03/26 20:36:51 by clumertz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	put_pixel(t_game *game, int x, int y, int color);
 void	draw_pov(t_game *game, float ray_x, float ray_y, int i);
 
 bool	touch(float px, float py, t_game *game);
+int	    ft_exitgame(t_game *game);
+void	init_game(t_game *game);
 
 
 /* ************************************************************************** */
@@ -63,15 +65,15 @@ void	parse_rgb(char *line, int *rgb);
 /* Parse map */
 
 void	verify_map(t_img *img);
-int ft_fill(char **map, int y, int x, int height);
+int     ft_fill(char **map, int y, int x, int height);
 void	verify_player(char player, t_img *img);
-void	print_map(char **map);
-int		is_map(char *line);
+int		is_map(char *line, t_img *img);
 
 /* ************************************************************************** */
 /*                                  Str utils                                 */
 /* ************************************************************************** */
 
+int	    ft_strncmp(char *s1, char *s2, int n);
 char	*get_next_line(int fd);
 char	*get_line(char *str);
 int		ft_isspace(char c);
@@ -84,5 +86,9 @@ void	ft_error(t_img *img, int type_error);
 void	free_all(t_img *img);
 void	free_map(t_map *map);
 void	free_db_str(char **db_str);
+
+
+
+void	print_parse(t_img *img);
 
 #endif

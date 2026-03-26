@@ -6,7 +6,7 @@
 #    By: clumertz <clumertz@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/26 15:24:18 by adpinhei          #+#    #+#              #
-#    Updated: 2026/03/26 18:43:54 by clumertz         ###   ########.fr        #
+#    Updated: 2026/03/26 19:53:01 by clumertz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ BUILD_DIR := build
 ###############################################################################
 #                               Source Files                                  #
 ###############################################################################
-SRC_FILES := parse.c get_next_line.c str_utils.c error.c init.c parse_map.c parse_conf.c render.c player.c draw.c draw_utils.c
+SRC_FILES := parse.c get_next_line.c str_utils.c error.c init.c parse_map.c parse_conf.c render.c player.c draw.c draw_utils.c main.c
 
 ###############################################################################
 #                               Object Files                                  #

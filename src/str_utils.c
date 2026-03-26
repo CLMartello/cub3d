@@ -6,11 +6,25 @@
 /*   By: clumertz <clumertz@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 18:36:42 by clumertz          #+#    #+#             */
-/*   Updated: 2026/03/24 21:26:31 by clumertz         ###   ########.fr       */
+/*   Updated: 2026/03/26 20:07:39 by clumertz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+int	ft_strncmp(char *s1, char *s2, int n)
+{
+	int	i;
+
+	i = 0;
+	while ((s1[i] != '\0' || s2[i] != '\0') && i < n)
+	{
+		if ((s1)[i] != (s2)[i])
+			return ((s1)[i] - (s2)[i]);
+		i++;
+	}
+	return (0);
+}
 
 int	ft_isspace(char c)
 {

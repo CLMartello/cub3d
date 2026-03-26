@@ -1,6 +1,28 @@
 
 #include "../includes/cub3d.h"
 
+void	verify_arg(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] != '\0')
+		i++;
+	if ((ft_strncmp(line + (i - 4), ".cub", 4)) != 0)
+		ft_error(NULL, ERR_ARGS);
+}
+
+void	verify_all(t_img *img)
+{
+	if (!img->n_wall || !img->s_wall || !img->w_wall || !img->e_wall)
+		ft_error(img, ERR_TEXT);
+	if (img->floor[0] == -1 || img->floor[1] == -1 || img->floor[2] == -1)
+		ft_error(img, ERR_RGB);
+	if (img->ceiling[0] == -1 || img->ceiling[1] == -1 || img->ceiling[2] == -1)
+		ft_error(img, ERR_RGB);
+	verify_map(img);
+}
+
 void	start_map(char *line, t_img *img)
 {
 	char	**new_map;
@@ -60,23 +82,24 @@ void	parse_cub_file(char *file, t_img *img)
 	int		fd;
 	char	*line;
 
+	
 	fd = -1;
 	line = NULL;
+	verify_arg(file);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		ft_error(img, ERR_OPEN);
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (is_map(line) == 0)
+		is_map(line, img);
+		if (img->map->found == FALSE)
 			verify_conf(line, img);
-		else if (is_map(line) == 1)
+		else
 			valid_map(line, img);
 		free(line);
 		line = get_next_line(fd);
 	}
 	free(line);
-	verify_map(img);
-	//rendering(img);
-	//free_all(img);
+	verify_all(img);
 }

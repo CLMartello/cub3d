@@ -6,7 +6,7 @@
 /*   By: clumertz <clumertz@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 15:00:35 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/26 18:44:58 by clumertz         ###   ########.fr       */
+/*   Updated: 2026/03/26 19:52:08 by clumertz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,25 +53,3 @@ int	ft_exitgame(t_game *game)
 	return (0);
 }
 
-int	main(int argc, char **argv)
-{
-	t_game	game;
-	t_img	*img;
-
-	if (argc != 2)
-	{
-		printf("Wrong number of arguments.\n");
-		return (1);
-	}
-	img = init_struct();
-	parse_cub_file(argv[1], img);
-	init_game(&game);
-	game.map = img->map->grid;
-	mlx_hook(game.win, DestroyNotify, NoEventMask, &ft_exitgame, &game);
-	mlx_hook(game.win, KeyPress, KeyPressMask, key_press, &game);
-	mlx_hook(game.win, KeyRelease, KeyReleaseMask, key_release, &game.player);
-	mlx_loop_hook(game.mlx, draw_loop, &game);
-	mlx_loop(game.mlx);
-	//free(game.map);
-	return (0);
-}

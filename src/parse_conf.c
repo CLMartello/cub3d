@@ -53,7 +53,7 @@ void	parse_texture(char *line, t_img *img)
 	if (line[i] == '.' && line[i + 1] == '/')
 		path = get_line(line + i);
 	if (access(path, F_OK | R_OK) == -1)
-		ft_error(img, ERR_ACCESS);
+		ft_error(img, ERR_ARGS);
 	if (line[0] == 'N')
 		img->n_wall = path;
 	else if (line[0] == 'S')

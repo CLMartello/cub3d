@@ -3,6 +3,7 @@
 
 void	init_map(t_map *map)
 {
+	map->found = FALSE;
 	map->height = 0;
 	map->grid = NULL;
 	map->player_orientation = -1;
@@ -12,6 +13,9 @@ void	init_map(t_map *map)
 
 void	init_img(t_img *img)
 {
+	int	i;
+
+	i = 0;
 	img->n_wall = NULL;
 	img->s_wall = NULL;
 	img->w_wall = NULL;
@@ -22,6 +26,12 @@ void	init_img(t_img *img)
 	img->ceiling = malloc(sizeof(int) * 3);
 	if (!img->ceiling)
 		ft_error(img, ERR_MALLOC);
+	while (i < 3)
+	{
+		img->floor[i] = -1;
+		img->ceiling[i] = -1;
+		i++;
+	}
 }
 
 t_img	*init_struct(void)

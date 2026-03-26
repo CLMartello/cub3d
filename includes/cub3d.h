@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: clumertz <clumertz@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 19:16:07 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/12 19:32:10 by clumertz         ###   ########.fr       */
+/*   Updated: 2026/03/26 19:53:21 by clumertz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,6 @@
 # include <string.h>
 # include <fcntl.h>
 # include <unistd.h>
+# include "structs.h"
 
 #endif

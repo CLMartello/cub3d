@@ -40,16 +40,21 @@ void	free_all(t_img	*img)
 	free(img);
 }
 
+
+//add erro se falta conf
+//add erro se mapa nao continuo
 void	ft_error(t_img	*img, int type_error)
 {
-	if (type_error == ERR_OPEN)
+	if (type_error == ERR_ARGS)
+		printf("Invalid argument.\n");
+	else if (type_error == ERR_OPEN)
 		printf("Unable to read .cub file.\n");
 	else if (type_error == ERR_MALLOC)
 		printf("Error in malloc.\n");
-	else if (type_error == ERR_ACCESS)
-		printf("No access to read texture.\n");
+	else if (type_error == ERR_TEXT)
+		printf("No access or missing texture.\n");
 	else if (type_error == ERR_RGB)
-		printf("RGB must be between 0 and 255.\n");
+		printf("No RGB range or missing RGB.\n");
 	else if (type_error == ERR_MAP)
 		printf("Invalid map.\n");
 	if (img)

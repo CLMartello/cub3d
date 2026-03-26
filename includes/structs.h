@@ -6,7 +6,7 @@
 /*   By: clumertz <clumertz@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 16:01:43 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/26 18:45:33 by clumertz         ###   ########.fr       */
+/*   Updated: 2026/03/26 19:58:00 by clumertz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,15 @@
 
 # include "cub3d.h"
 
+# define TRUE 1
+# define FALSE 0
+
 enum e_erro_identifier
 {
-	ERR_OPEN = 1,
+	ERR_ARGS = 1,
+	ERR_OPEN,
 	ERR_MALLOC,
-	ERR_ACCESS,
+	ERR_TEXT,
 	ERR_RGB,
 	ERR_MAP,
 };
@@ -36,8 +40,11 @@ enum e_player_orientation_identifier
 /*                                  Structs                                   */
 /* ************************************************************************** */
 
+
+
 typedef struct s_map
 {
+	int		found;
 	int		height;
 	char	**grid;
 	int		player_x;
