@@ -6,7 +6,7 @@
 /*   By: clumertz <clumertz@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 16:01:43 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/24 21:29:00 by clumertz         ###   ########.fr       */
+/*   Updated: 2026/03/26 18:32:32 by clumertz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,32 @@ typedef struct s_img
 	int		*ceiling;
 	t_map	*map;
 }		t_img;
+
+
+typedef struct s_player
+{
+	float	x;
+	float	y;
+	float	angle;
+	bool	key_up;
+	bool	key_down;
+	bool	key_left;
+	bool	key_right;
+	bool	left_rotate;
+	bool	right_rotate;
+}	t_player;
+
+typedef struct s_game
+{
+	void		*mlx;
+	void		*win;
+	void		*img;
+	char		*data;
+	int			bpp;
+	int			size_line;
+	int			endian;
+	char		**map;
+	t_player	player;
+}	t_game;
 
 #endif

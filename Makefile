@@ -6,7 +6,7 @@
 #    By: clumertz <clumertz@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/26 15:24:18 by adpinhei          #+#    #+#              #
-#    Updated: 2026/03/24 20:58:59 by clumertz         ###   ########.fr        #
+#    Updated: 2026/03/26 18:30:42 by clumertz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ BUILD_DIR := build
 ###############################################################################
 #                               Source Files                                  #
 ###############################################################################
-SRC_FILES := parse.c main.c get_next_line.c str_utils.c error.c init.c parse_map.c parse_conf.c
+SRC_FILES := parse.c main.c get_next_line.c str_utils.c error.c init.c parse_map.c parse_conf.c render.c player.c draw.c draw_utils.c
 
 ###############################################################################
 #                               Object Files                                  #
@@ -71,7 +71,7 @@ leak: CFLAGS += -fsanitize=address,undefined -g
 ###############################################################################
 .PHONY: all clean fclean re valgrind norm gdb leak
 
-all: $(BUILD_DIR) $(MLX_LIB) $(NAME)
+all: $(VALGRINDRC) $(BUILD_DIR) $(MLX_LIB) $(NAME)
 
 ###############################################################################
 #                               Create ./build                                #
@@ -112,8 +112,7 @@ valgrind: $(NAME)
 	@valgrind --leak-check=full \
 	--show-leak-kinds=all \
 	--track-origins=yes \
-	--trace-children=yes \
-	--track-fds=yes \
+	--suppressions=mlx.supp \
 	./$(NAME) $(PARAM)
 
 gdb: $(NAME)
