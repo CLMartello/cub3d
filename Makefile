@@ -24,15 +24,15 @@ PARAM :=
 ###############################################################################
 #                                mlx Flags                                    #
 ###############################################################################
-MLX_PATH := ./minilibx-linux
-MLX_LIB := $(MLX_PATH)/libmlx_Linux.a
-MLX_FLAGS := -L$(MLX_PATH) -lmlx -lXext -lX11
+# MLX_PATH := ./minilibx-linux
+# MLX_LIB := $(MLX_PATH)/libmlx_Linux.a
+# MLX_FLAGS := -L$(MLX_PATH) -lmlx -lXext -lX11
 
 ###############################################################################
 #                                    Flags                                    #
 ###############################################################################
-CFLAGS := -Wall -Wextra -Werror -g -Iincludes -I$(MLX_PATH)
-LIBS := -L$(MLX_PATH) -lmlx -lXext -lX11 -lm
+CFLAGS := -Wall -Wextra -Werror -g
+# LIBS := -L$(MLX_PATH) -lmlx -lXext -lX11 -lm
 
 ###############################################################################
 #                                    vpath                                    #
@@ -48,7 +48,7 @@ BUILD_DIR := build
 ###############################################################################
 #                               Source Files                                  #
 ###############################################################################
-SRC_FILES := parse.c get_next_line.c str_utils.c error.c init.c parse_map.c parse_conf.c render.c player.c draw.c draw_utils.c main.c
+SRC_FILES := parse.c get_next_line.c str_utils.c error.c init.c parse_map.c parse_conf.c main.c
 
 ###############################################################################
 #                               Object Files                                  #

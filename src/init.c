@@ -11,12 +11,14 @@ void	init_map(t_map *map)
 	map->player_y = -1;
 }
 
+//essa parte do floor e ceiling ainda pode melhorar
 void	init_img(t_img *img)
 {
 	int	i;
 
 	i = 0;
-	img->exit = FALSE;
+	img->fd = -1;
+	img->line = NULL;
 	img->n_wall = NULL;
 	img->s_wall = NULL;
 	img->w_wall = NULL;

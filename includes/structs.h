@@ -21,7 +21,6 @@
 enum e_erro_identifier
 {
 	ERR_ARGS = 1,
-	ERR_OPEN,
 	ERR_MALLOC,
 	ERR_TEXT,
 	ERR_RGB,
@@ -30,10 +29,10 @@ enum e_erro_identifier
 
 enum e_player_orientation_identifier
 {
-	NORTH = 1,
-	SOUTH,
-	WEST,
-	EAST,
+	NORTH = 78,
+	SOUTH = 83,
+	WEST = 87,
+	EAST = 69,
 };
 
 /* ************************************************************************** */
@@ -54,7 +53,8 @@ typedef struct s_map
 
 typedef struct s_img
 {
-	int		exit;
+	int		fd;
+	char	*line;
 	char	*n_wall;
 	char	*s_wall;
 	char	*w_wall;

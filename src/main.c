@@ -11,11 +11,8 @@ int	main(int argc, char **argv)
 	verify_arg(argv[1]);
 	img = init_struct();
 	parse_cub_file(argv[1], img);
-	if (img->exit == FALSE)
-	{
-		print_parse(img);
-		//rendering
-	}
+	print_parse(img);
+	//rendering
 	//init_game(&game);
 	//game.map = img->map->grid;
 	//mlx_hook(game.win, DestroyNotify, NoEventMask, &ft_exitgame, &game);

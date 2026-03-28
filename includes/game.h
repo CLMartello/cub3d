@@ -49,26 +49,25 @@ void	init_game(t_game *game);
 /*                                  Parser Func                               */
 /* ************************************************************************** */
 
+void	verify_text(t_img *img);
 void	verify_arg(char *line);
 void	parse_cub_file(char *file, t_img *img);
-void	valid_map(char *line, t_img *img);
-void	start_map(char *line, t_img *img);
+void	start_map(t_img *img);
 void	init_map(t_map *map);
 void	init_img(t_img *img);
 t_img	*init_struct(void);
 
 /* Parse conf */
 
-void	verify_conf(char *line, t_img *img);
-void	parse_texture(char *line, int pos, t_img *img);
-void	parse_rgb(char *line, int *rgb, t_img *img);
+void	verify_conf(t_img *img);
+void	parse_texture(t_img *img, int pos);
+void	parse_rgb(t_img *img, int *rgb, int pos);
 
 /* Parse map */
 
 void	verify_map(t_img *img);
 int     ft_fill(char **map, int y, int x, int height);
-void	verify_player(char player, t_img *img);
-int		is_map(char *line, t_img *img);
+int		is_map(t_img *img);
 
 /* ************************************************************************** */
 /*                                  Str utils                                 */

@@ -43,31 +43,16 @@ void	verify_map(t_img *img)
 		free_db_str(map_copy);
 }
 
-void	verify_player(char player, t_img *img)
-{
-	if (img->map->player_orientation != -1)
-		ft_error(img, ERR_MAP);
-	else if (player == 'N')
-		img->map->player_orientation = NORTH;
-	else if (player == 'S')
-		img->map->player_orientation = SOUTH;
-	else if (player == 'W')
-		img->map->player_orientation = WEST;
-	else if (player == 'E')
-		img->map->player_orientation = EAST;
-	img->map->player_y = img->map->height;
-}
-
-int	is_map(char *line, t_img *img)
+int	is_map(t_img *img)
 {
 	int	i;
 
 	i = 0;
-	while (line[i] != '\0')
+	while (img->line[i] != '\0')
 	{
-		while (ft_isspace(line[i]) == 1)
+		while (ft_isspace(img->line[i]) == 1)
 			i++;
-		if (ft_strchr("10", line[i]) == 1)
+		if (ft_strchr("10", img->line[i]) == 1)
 		{
 			img->map->found = TRUE;
 			return (1);
