@@ -16,6 +16,7 @@ void	init_img(t_img *img)
 	int	i;
 
 	i = 0;
+	img->exit = FALSE;
 	img->n_wall = NULL;
 	img->s_wall = NULL;
 	img->w_wall = NULL;

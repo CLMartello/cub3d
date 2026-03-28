@@ -66,13 +66,10 @@ void	valid_map(char *line, t_img *img)
 			img->map->player_x = i;
 			i++;
 		}
-		else if (line[i] == '\n')
+		else if (line[i] == '\n' || img->exit == TRUE)
 			break ;
 		else
-		{
-			free(line);
 			ft_error(img, ERR_MAP);
-		}
 	}
 	start_map(line, img);
 }
@@ -81,16 +78,14 @@ void	parse_cub_file(char *file, t_img *img)
 {
 	int		fd;
 	char	*line;
-
 	
 	fd = -1;
 	line = NULL;
-	verify_arg(file);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		ft_error(img, ERR_OPEN);
 	line = get_next_line(fd);
-	while (line)
+	while (line && img->exit == FALSE)
 	{
 		is_map(line, img);
 		if (img->map->found == FALSE)
@@ -100,6 +95,8 @@ void	parse_cub_file(char *file, t_img *img)
 		free(line);
 		line = get_next_line(fd);
 	}
+	close (fd);
 	free(line);
-	verify_all(img);
+	if (img->exit == FALSE)
+		verify_all(img);
 }

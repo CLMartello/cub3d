@@ -1,19 +1,6 @@
 
 #include "../includes/cub3d.h"
 
-static size_t	ft_strlen(const char *c)
-{
-	int	i;
-
-	if (!c)
-		return (0);
-	i = 0;
-	while (c[i] && c[i] != '\0')
-		i++;
-	return (i);
-}
-
-
 int ft_fill(char **map, int y, int x, int height)
 {
     if (y < 0 || x < 0 || x >= (int)ft_strlen(map[y]) || y >= height || map[y][x] == ' ')
@@ -80,7 +67,7 @@ int	is_map(char *line, t_img *img)
 	{
 		while (ft_isspace(line[i]) == 1)
 			i++;
-		if (line[i] == '1')
+		if (ft_strchr("10", line[i]) == 1)
 		{
 			img->map->found = TRUE;
 			return (1);
@@ -88,7 +75,6 @@ int	is_map(char *line, t_img *img)
 		else
 			break ;
 	}
-	//flag no struct map
 	return (0);
 }
 
@@ -97,8 +83,8 @@ void	print_parse(t_img *img)
 	int	i;
 
 	i = 0;
-	printf("Textures paths\n n: %s\n s: %s\n w: %s\n e: %s\n", img->n_wall, img->s_wall, img->w_wall, img->e_wall);
-	printf("RGB of floor: %d, %d and %d \n RGB of ceiling: %d, %d and %d\n", img->floor[0], img->floor[1], img->floor[2], img->ceiling[0], img->ceiling[1], img->ceiling[2]);
+	printf("Textures paths\nN: %s\nS: %s\nW: %s\nE: %s\n", img->n_wall, img->s_wall, img->w_wall, img->e_wall);
+	printf("RGB of floor: %d, %d and %d \nRGB of ceiling: %d, %d and %d\n", img->floor[0], img->floor[1], img->floor[2], img->ceiling[0], img->ceiling[1], img->ceiling[2]);
 	printf("Map:\n");
 	while (img->map->grid[i])
 	{

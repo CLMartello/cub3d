@@ -6,7 +6,7 @@
 /*   By: clumertz <clumertz@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 16:01:43 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/26 19:58:00 by clumertz         ###   ########.fr       */
+/*   Updated: 2026/03/28 19:31:58 by clumertz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_map
 
 typedef struct s_img
 {
+	int		exit;
 	char	*n_wall;
 	char	*s_wall;
 	char	*w_wall;

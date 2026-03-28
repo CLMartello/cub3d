@@ -16,7 +16,7 @@ int	ft_atoi(char *nbr)
 	return (value);
 }
 
-void	parse_rgb(char *line, int *rgb)
+void	parse_rgb(char *line, int *rgb, t_img *img)
 {
 	int	i;
 	int	j;
@@ -25,13 +25,13 @@ void	parse_rgb(char *line, int *rgb)
 	j = 0;
 	while (line[i] != '\0' && j < 3)
 	{
-		if (line[i] == ' ' || line[i] == ',')
+		while (line[i] == ' ' || line[i] == ',')
 			i++;
 		if (line[i] >= '0' && line[i] <= '9')
 		{
 			rgb[j] = ft_atoi(line + i);
 			if (rgb[j] > 255)
-				ft_error(NULL, ERR_RGB);
+				ft_error(img, ERR_RGB);
 			j++;
 			while (line[i] >= '0' && line[i] <= '9')
 				i++;
@@ -41,26 +41,28 @@ void	parse_rgb(char *line, int *rgb)
 	}
 }
 
-void	parse_texture(char *line, t_img *img)
+void	parse_texture(char *line, int pos, t_img *img)
 {
 	int		i;
 	char	*path;
 
-	i = 2;
+	i = pos + 2;
 	path = NULL;
 	while (ft_isspace(line[i]) == 1)
 		i++;
-	if (line[i] == '.' && line[i + 1] == '/')
-		path = get_line(line + i);
+	path = get_line(line + i);
 	if (access(path, F_OK | R_OK) == -1)
-		ft_error(img, ERR_ARGS);
-	if (line[0] == 'N')
+	{
+		free(path);
+		ft_error(img, ERR_TEXT);
+	}
+	else if (line[pos] == 'N' && !img->n_wall)
 		img->n_wall = path;
-	else if (line[0] == 'S')
+	else if (line[pos] == 'S' && !img->s_wall)
 		img->s_wall = path;
-	else if (line[0] == 'W')
+	else if (line[pos] == 'W' && !img->w_wall)
 		img->w_wall = path;
-	else if (line[0] == 'E')
+	else if (line[pos] == 'E' && !img->e_wall)
 		img->e_wall = path;
 }
 
@@ -72,15 +74,15 @@ void	verify_conf(char *line, t_img *img)
 	while (ft_isspace(line[i]) == 1)
 		i++;
 	if (line[i] == 'N' && line[i + 1] == 'O')
-		parse_texture(line, img);
+		parse_texture(line, i, img);
 	else if (line[i] == 'S' && line[i + 1] == 'O')
-		parse_texture(line, img);
+		parse_texture(line, i, img);
 	else if (line[i] == 'W' && line[i + 1] == 'E')
-		parse_texture(line, img);
+		parse_texture(line, i, img);
 	else if (line[i] == 'E' && line[i + 1] == 'A')
-		parse_texture(line, img);
+		parse_texture(line, i, img);
 	else if (line[i] == 'F')
-		parse_rgb(line + 1, img->floor);
+		parse_rgb(line + 1, img->floor, img);
 	else if (line[i] == 'C')
-		parse_rgb(line + 1, img->ceiling);
+		parse_rgb(line + 1, img->ceiling, img);
 }

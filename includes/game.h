@@ -6,7 +6,7 @@
 /*   By: clumertz <clumertz@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 15:19:08 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/26 20:36:51 by clumertz         ###   ########.fr       */
+/*   Updated: 2026/03/28 20:21:33 by clumertz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	init_game(t_game *game);
 /*                                  Parser Func                               */
 /* ************************************************************************** */
 
+void	verify_arg(char *line);
 void	parse_cub_file(char *file, t_img *img);
 void	valid_map(char *line, t_img *img);
 void	start_map(char *line, t_img *img);
@@ -59,8 +60,8 @@ t_img	*init_struct(void);
 /* Parse conf */
 
 void	verify_conf(char *line, t_img *img);
-void	parse_texture(char *line, t_img *img);
-void	parse_rgb(char *line, int *rgb);
+void	parse_texture(char *line, int pos, t_img *img);
+void	parse_rgb(char *line, int *rgb, t_img *img);
 
 /* Parse map */
 
@@ -73,6 +74,8 @@ int		is_map(char *line, t_img *img);
 /*                                  Str utils                                 */
 /* ************************************************************************** */
 
+int	    ft_strlen(char *c);
+int	    ft_strchr(char *s, int c);
 int	    ft_strncmp(char *s1, char *s2, int n);
 char	*get_next_line(int fd);
 char	*get_line(char *str);

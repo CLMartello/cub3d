@@ -37,27 +37,24 @@ void	free_all(t_img	*img)
 		free(img->floor);
 	if (img->ceiling)
 		free(img->ceiling);
-	free(img);
+	if (img)
+		free(img);
 }
 
-
-//add erro se falta conf
-//add erro se mapa nao continuo
 void	ft_error(t_img	*img, int type_error)
 {
+	printf("Error\n");
 	if (type_error == ERR_ARGS)
-		printf("Invalid argument.\n");
+		printf("Invalid argument\n");
 	else if (type_error == ERR_OPEN)
-		printf("Unable to read .cub file.\n");
+		printf("Unable to read .cub file\n");
 	else if (type_error == ERR_MALLOC)
 		printf("Error in malloc.\n");
 	else if (type_error == ERR_TEXT)
-		printf("No access or missing texture.\n");
+		printf("No access or missing texture\n");
 	else if (type_error == ERR_RGB)
-		printf("No RGB range or missing RGB.\n");
+		printf("No RGB range or missing RGB\n");
 	else if (type_error == ERR_MAP)
-		printf("Invalid map.\n");
-	if (img)
-		free_all(img);
-	exit(1);
+		printf("Invalid map\n");
+	img->exit = TRUE;
 }
