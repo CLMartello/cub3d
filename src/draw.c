@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 16:17:27 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/24 17:30:08 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/03/24 19:36:17 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static void	draw_line(t_player *player, t_game *game, float start_x, int i)
 	ray_y = player->y;
 	while (!touch(ray_x, ray_y, game))
 	{
-	//	put_pixel(game, ray_x, ray_y, 0xFF0000);
+		//put_pixel(game, ray_x, ray_y, 0xFF0000);
 		ray_x += cos_angle;
 		ray_y += sin_angle;
 	}
