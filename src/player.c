@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 16:06:33 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/30 16:24:12 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/03/30 20:46:33 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,20 +51,17 @@ void	move_player(t_player *player, t_game *game)
 		player->angle = 2 * PI;
 	move_utils(game, cos_angle, sin_angle, speed);
 }
-
 static void	move_or_collide(float new_x, float new_y, t_game *game)
 {
-	//new + 0.2 and new - 0.2 are getting out of bounds. Check the arrays beggining and end
-	if (!game)
-		return ;
-	if ((game->map[(int)new_y][(int)(new_x + 0.2)] != '1') && \
-(game->map[(int)new_y][(int)(new_x - 0.2)] != '1'))
-		game->player.x = new_x;
-	if ((game->map[(int)(new_y + 0.2)][(int)new_x] != '1') && \
-(game->map[(int)(new_y - 0.2)][(int)new_x] != '1'))
+	if (game->player.key_up  && (game->map[(int)(new_y + 0.2)] != NULL) && (game->map[(int)(new_y + 0.2)][(int)new_x] != '1'))
 		game->player.y = new_y;
+	if (game->player.key_down  && ((int)(new_y - 0.2) >= 0) && (game->map[(int)(new_y - 0.2)][(int)new_x] != '1'))
+		game->player.y = new_y;
+	if (game->player.key_right && (game->map[(int)new_y][(int)(new_x + 0.2)] != '\0') && (game->map[(int)new_y][(int)(new_x + 0.2)] != '1'))
+		game->player.x = new_x;
+	if (game->player.key_left && (new_x - 0.2 >= 0) && (game->map[(int)new_y][(int)(new_x - 0.2)] != '1'))
+		game->player.x = new_x;
 }
-
 static void	move_utils(t_game *game, float c_ang, float s_ang, int speed)
 {
 	float		new_x;
@@ -74,7 +71,7 @@ static void	move_utils(t_game *game, float c_ang, float s_ang, int speed)
 	new_y = game->player.y;
 	if (game && game->player.key_up)
 	{
-		new_x = game->player.x + c_ang * speed;
+		new_x = game->player.x + c_ang * speed; //pass this as a parameter already
 		new_y = game->player.y + s_ang * speed;
 	}
 	if (game && game->player.key_down)
