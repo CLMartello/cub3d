@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 15:19:08 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/24 17:28:38 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/03/30 15:48:41 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int		key_release(int keycode, t_player *player);
 int		key_press(int keycode, t_game *game);
 int		draw_loop(t_game *game);
 
-void	move_player(t_player *player);
+void	move_player(t_player *player, t_game *game);
 void	init_player(t_player *player);
 void	clear_image(t_game *game);
 void	put_pixel(t_game *game, int x, int y, int color);

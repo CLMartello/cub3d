@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 16:17:27 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/30 15:00:40 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/03/30 15:48:21 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	draw_loop(t_game *game)
 	if (!game)
 		return (-1);
 	player = &game->player;
-	move_player(player);
+	move_player(player, game);
 	clear_image(game);
 //	draw_square(game, 0x00FF00, 10, player->x, player->y);
 //	draw_map(game);

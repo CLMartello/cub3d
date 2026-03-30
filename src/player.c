@@ -6,14 +6,14 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 16:06:33 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/24 16:46:07 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/03/30 16:20:33 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 #include "../includes/structs.h"
 
-static void	move_utils(t_player *player, float c_ang, float s_ang, int speed);
+static void	move_utils(t_game *game, float c_ang, float s_ang, int speed);
 
 void	init_player(t_player *player)
 {
@@ -30,7 +30,7 @@ void	init_player(t_player *player)
 	player->right_rotate = false;
 }
 
-void	move_player(t_player *player)
+void	move_player(t_player *player, t_game *game)
 {
 	int		speed;
 	float	angle_speed;
@@ -49,31 +49,49 @@ void	move_player(t_player *player)
 		player->angle = 0;
 	if (player->angle < 0)
 		player->angle = 2 * PI;
-	move_utils(player, cos_angle, sin_angle, speed);
+	move_utils(game, cos_angle, sin_angle, speed);
 }
 
-static void	move_utils(t_player *player, float c_ang, float s_ang, int speed)
+static void	move_or_collide(float new_x, float new_y, t_game *game)
 {
-	if (player->key_up)
+	if (!game)
+		return ;
+	if ((game->map[(int)new_y][(int)(new_x + 0.2)] != '1') && \
+(game->map[(int)new_y][(int)(new_x - 0.2)] != '1'))
+		game->player.x = new_x;
+	if ((game->map[(int)(new_y + 0.2)][(int)new_x] != '1') && \
+(game->map[(int)(new_y - 0.2)][(int)new_x] != '1'))
+		game->player.y = new_y;
+}
+
+static void	move_utils(t_game *game, float c_ang, float s_ang, int speed)
+{
+	float		new_x;
+	float		new_y;
+
+	new_x = game->player.x;
+	new_y = game->player.y;
+	if (game && game->player.key_up)
 	{
-		player->x += c_ang * speed;
-		player->y += s_ang * speed;
+		new_x = game->player.x + c_ang * speed;
+		new_y = game->player.y + s_ang * speed;
 	}
-	if (player->key_down)
+	if (game && game->player.key_down)
 	{
-		player->x -= c_ang * speed;
-		player->y -= s_ang * speed;
+		new_x = game->player.x - c_ang * speed;
+		new_y = game->player.y - s_ang * speed;
 	}
-	if (player->key_left)
+	if (game && game->player.key_left)
 	{
-		player->x += s_ang * speed;
-		player->y -= c_ang * speed;
+		new_x = game->player.x + s_ang * speed;
+		new_y = game->player.y - c_ang * speed;
 	}
-	if (player->key_right)
+	if (game && game->player.key_right)
 	{
-		player->x -= s_ang * speed;
-		player->y += c_ang * speed;
+		new_x = game->player.x - s_ang * speed;
+		new_y = game->player.y + c_ang * speed;
 	}
+	move_or_collide(new_x, new_y, game);
 }
 
 int	key_press(int keycode, t_game *game)
