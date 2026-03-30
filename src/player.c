@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 16:06:33 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/30 16:20:33 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/03/30 16:24:12 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	move_player(t_player *player, t_game *game)
 
 static void	move_or_collide(float new_x, float new_y, t_game *game)
 {
+	//new + 0.2 and new - 0.2 are getting out of bounds. Check the arrays beggining and end
 	if (!game)
 		return ;
 	if ((game->map[(int)new_y][(int)(new_x + 0.2)] != '1') && \
