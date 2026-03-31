@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: clumertz <clumertz@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/31 19:37:29 by clumertz          #+#    #+#             */
+/*   Updated: 2026/03/31 19:38:01 by clumertz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
@@ -10,20 +21,11 @@ void	verify_arg(char *line)
 		ft_error(NULL, ERR_ARGS);
 }
 
-//acho que da pra fazer separado por momento do parse
-
 void	verify_text(t_img *img)
 {
 	if (!img->n_wall || !img->s_wall || !img->w_wall || !img->e_wall)
 		ft_error(img, ERR_TEXT);
 }
-// void	verify_rgb(t_img *img)
-// {
-// 	if (img->floor[0] == -1 || img->floor[1] == -1 || img->floor[2] == -1)
-// 		ft_error(img, ERR_RGB);
-// 	if (img->ceiling[0] == -1 || img->ceiling[1] == -1 || img->ceiling[2] == -1)
-// 		ft_error(img, ERR_RGB);
-// }
 
 void	start_map(t_img *img)
 {

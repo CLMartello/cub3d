@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_map.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: clumertz <clumertz@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/03/31 19:38:24 by clumertz          #+#    #+#             */
+/*   Updated: 2026/03/31 19:41:55 by clumertz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int ft_fill(char **map, int y, int x, int height)
+int	ft_fill(char **map, int y, int x, int height)
 {
-    if (y < 0 || x < 0 || x >= (int)ft_strlen(map[y]) || y >= height || map[y][x] == ' ')
+	if (y < 0 || x < 0 || x >= (int)ft_strlen(map[y])
+		|| y >= height || map[y][x] == ' ')
 		return (0);
 	else if (map[y][x] == '1' || map[y][x] == 'F')
 		return (1);
-    map[y][x] = 'F';
+	map[y][x] = 'F';
 	if (!ft_fill(map, y + 1, x, height))
 		return (0);
 	if (!ft_fill(map, y, x + 1, height))
@@ -16,7 +28,7 @@ int ft_fill(char **map, int y, int x, int height)
 		return (0);
 	if (!ft_fill(map, y, x - 1, height))
 		return (0);
-    return (1);
+	return (1);
 }
 
 void	verify_map(t_img *img)
@@ -34,7 +46,8 @@ void	verify_map(t_img *img)
 		i++;
 	}
 	map_copy[i] = NULL;
-	if (ft_fill(map_copy, img->map->player_y, img->map->player_x, img->map->height) == 0)
+	if (ft_fill(map_copy, img->map->player_y,
+			img->map->player_x, img->map->height) == 0)
 	{
 		free_db_str(map_copy);
 		ft_error(img, ERR_MAP);
@@ -68,8 +81,11 @@ void	print_parse(t_img *img)
 	int	i;
 
 	i = 0;
-	printf("Textures paths\nN: %s\nS: %s\nW: %s\nE: %s\n", img->n_wall, img->s_wall, img->w_wall, img->e_wall);
-	printf("RGB of floor: %d, %d and %d \nRGB of ceiling: %d, %d and %d\n", img->floor[0], img->floor[1], img->floor[2], img->ceiling[0], img->ceiling[1], img->ceiling[2]);
+	printf("Textures paths\nN: %s\nS: %s\nW: %s\nE: %s\n",
+		img->n_wall, img->s_wall, img->w_wall, img->e_wall);
+	printf("RGB of floor: %d, %d and %d \nRGB of ceiling: %d, %d and %d\n",
+		img->floor[0], img->floor[1], img->floor[2], img->ceiling[0],
+		img->ceiling[1], img->ceiling[2]);
 	printf("Map:\n");
 	while (img->map->grid[i])
 	{
