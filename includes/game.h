@@ -6,7 +6,11 @@
 /*   By: clumertz <clumertz@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 15:19:08 by adpinhei          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2026/03/28 20:21:33 by clumertz         ###   ########.fr       */
+=======
+/*   Updated: 2026/03/31 16:53:26 by adpinhei         ###   ########.fr       */
+>>>>>>> rendering
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +24,9 @@
 /*                                  Macros                                    */
 /* ************************************************************************** */
 
-# define WIDTH 816 //BLOCK * map_size
-# define HEIGHT 528 // BLOCK * map_length
-# define BLOCK 48
+# define WIDTH 1200
+# define HEIGHT 800
+# define BLOCK 64
 
 # define PI 3.14159265359
 
@@ -34,7 +38,7 @@ int		key_release(int keycode, t_player *player);
 int		key_press(int keycode, t_game *game);
 int		draw_loop(t_game *game);
 
-void	move_player(t_player *player);
+void	move_player(t_player *player, t_game *game);
 void	init_player(t_player *player);
 void	clear_image(t_game *game);
 void	put_pixel(t_game *game, int x, int y, int color);

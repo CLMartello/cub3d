@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 16:20:41 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/24 17:28:08 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/03/30 15:17:34 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "../includes/structs.h"
 
 static float	distance(float x, float y);
+static float	fixed_dist(float delta_x, float delta_y, t_game *game);
 
 void	clear_image(t_game *game)
 {
@@ -62,7 +63,7 @@ void	draw_pov(t_game *game, float ray_x, float ray_y, int i)
 	int			end;
 
 	player = &game->player;
-	dist = distance(ray_x - player->x, ray_y - player->y);
+	dist = fixed_dist(ray_x - player->x, ray_y - player->y, game);
 	height = (BLOCK / dist) * (WIDTH / 2);
 	start_y = (HEIGHT - height) / 2;
 	end = start_y + height;
@@ -76,4 +77,14 @@ void	draw_pov(t_game *game, float ray_x, float ray_y, int i)
 static float	distance(float x, float y)
 {
 	return (sqrt(x * x + y * y));
+}
+
+static float	fixed_dist(float delta_x, float delta_y, t_game *game)
+{
+	float	angle;
+	float	fix_dist;
+
+	angle = atan2(delta_y, delta_x) - game->player.angle;
+	fix_dist = distance(delta_x, delta_y) * cos(angle);
+	return (fix_dist);
 }
