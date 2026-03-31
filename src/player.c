@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 16:06:33 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/31 19:52:17 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/03/31 20:01:42 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,14 @@ void	init_player(t_player *player, t_img *img)
 	y = img->map->player_y;
 	player->x = BLOCK * x;
 	player->y = BLOCK * y;
-	player->angle = (3 * PI) / 2; // PI/2->S; 2 * PI->E; PI->W; (3*PI)/2->N
+	if (img->map->player_orientation == 'N')
+		player->angle = (3 * PI) / 2;
+	if (img->map->player_orientation == 'S')
+		player->angle = PI / 2;
+	if (img->map->player_orientation == 'W')
+		player->angle = PI;
+	if (img->map->player_orientation == 'E')
+		player->angle = PI * 2;
 	player->key_up = false;
 	player->key_down = false;
 	player->key_left = false;
