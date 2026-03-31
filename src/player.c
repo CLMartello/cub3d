@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 16:06:33 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/31 17:11:21 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/03/31 17:46:27 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ void	move_player(t_player *player, t_game *game)
 
 	speed = 3;
 	angle_speed = 0.03;
-	cos_angle = cos(player->angle);
-	sin_angle = sin(player->angle);
 	if (player->left_rotate)
 		player->angle -= angle_speed;
 	if (player->right_rotate)
@@ -49,18 +47,18 @@ void	move_player(t_player *player, t_game *game)
 		player->angle = 0;
 	if (player->angle < 0)
 		player->angle = 2 * PI;
+	cos_angle = cos(player->angle);
+	sin_angle = sin(player->angle);
 	move_utils(game, cos_angle, sin_angle, speed);
 }
 static void	move_or_collide(float new_x, float new_y, t_game *game)
 {
-	if (game->player.key_up  && (game->map[(int)(new_y + 0.2)] != NULL) && (game->map[(int)(new_y + 0.2)][(int)new_x] != '1'))
-		game->player.y = new_y;
-	if (game->player.key_down  && ((int)(new_y - 0.2) >= 0) && (game->map[(int)(new_y - 0.2)][(int)new_x] != '1'))
-		game->player.y = new_y;
-	if (game->player.key_right && (game->map[(int)new_y][(int)(new_x + 0.2)] != '\0') && (game->map[(int)new_y][(int)(new_x + 0.2)] != '1'))
-		game->player.x = new_x;
-	if (game->player.key_left && (new_x - 0.2 >= 0) && (game->map[(int)new_y][(int)(new_x - 0.2)] != '1'))
-		game->player.x = new_x;
+	t_player	*player;
+
+	player = &game->player;
+	player->x = new_x;
+	player->y = new_y;
+	player = NULL;
 }
 static void	move_utils(t_game *game, float c_ang, float s_ang, int speed)
 {
