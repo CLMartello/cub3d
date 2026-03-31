@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clumertz <clumertz@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 15:19:08 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/31 18:51:13 by clumertz         ###   ########.fr       */
+/*   Updated: 2026/03/31 19:18:00 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 int		key_release(int keycode, t_player *player);
 int		key_press(int keycode, t_game *game);
 int		draw_loop(t_game *game);
+int		ft_exitgame(t_game *game);
+
 
 void	move_player(t_player *player, t_game *game);
 void	init_player(t_player *player, t_img *img);
@@ -41,7 +43,6 @@ void	put_pixel(t_game *game, int x, int y, int color);
 void	draw_pov(t_game *game, float ray_x, float ray_y, int i);
 
 bool	touch(float px, float py, t_game *game);
-int	    ft_exitgame(t_game *game);
 void	init_game(t_game *game, t_img *img);
 
 

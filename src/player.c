@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clumertz <clumertz@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 16:06:33 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/31 18:52:29 by clumertz         ###   ########.fr       */
+/*   Updated: 2026/03/31 19:17:37 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	key_press(int keycode, t_game *game)
 
 	player = &game->player;
 	if (keycode == XK_Escape)
-		mlx_loop_end(game->mlx);
+		ft_exitgame(game);
 	if (keycode == XK_W || keycode == XK_w)
 		player->key_up = true;
 	if (keycode == XK_S || keycode == XK_s)
