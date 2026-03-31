@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 16:06:33 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/31 19:17:37 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/03/31 19:52:17 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,15 @@ static void	move_utils(t_game *game, float c_ang, float s_ang, int speed);
 
 void	init_player(t_player *player, t_img *img)
 {
+	float	x;
+	float	y;
+
 	if (!player)
 		return ;
-	player->x = (float)img->map->player_x;
-	player->y = (float)img->map->player_y;
+	x = img->map->player_x;
+	y = img->map->player_y;
+	player->x = BLOCK * x;
+	player->y = BLOCK * y;
 	player->angle = (3 * PI) / 2; // PI/2->S; 2 * PI->E; PI->W; (3*PI)/2->N
 	player->key_up = false;
 	player->key_down = false;
