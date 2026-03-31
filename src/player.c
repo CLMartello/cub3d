@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: clumertz <clumertz@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 16:06:33 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/31 18:12:17 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/03/31 18:52:29 by clumertz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 
 static void	move_utils(t_game *game, float c_ang, float s_ang, int speed);
 
-void	init_player(t_player *player)
+void	init_player(t_player *player, t_img *img)
 {
 	if (!player)
 		return ;
-	player->x = WIDTH / 2;
-	player->y = HEIGHT / 2;
+	player->x = (float)img->map->player_x;
+	player->y = (float)img->map->player_y;
 	player->angle = (3 * PI) / 2; // PI/2->S; 2 * PI->E; PI->W; (3*PI)/2->N
 	player->key_up = false;
 	player->key_down = false;
@@ -39,6 +39,8 @@ void	move_player(t_player *player, t_game *game)
 
 	speed = 3;
 	angle_speed = 0.03;
+	cos_angle = cos(player->angle);
+	sin_angle = sin(player->angle);
 	if (player->left_rotate)
 		player->angle -= angle_speed;
 	if (player->right_rotate)
