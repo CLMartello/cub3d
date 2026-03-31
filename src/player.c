@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 16:06:33 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/30 20:46:33 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/03/31 16:55:47 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	init_player(t_player *player)
 		return ;
 	player->x = WIDTH / 2;
 	player->y = HEIGHT / 2;
-	player->angle = PI / 2;
+	player->angle = (3 * PI) / 2; // PI/2->S; 2 * PI->E; PI->W; (3*PI)/2->N
 	player->key_up = false;
 	player->key_down = false;
 	player->key_left = false;
