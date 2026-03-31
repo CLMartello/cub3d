@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   draw_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: clumertz <clumertz@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 16:20:41 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/31 18:29:21 by clumertz         ###   ########.fr       */
+/*   Updated: 2026/03/31 20:18:06 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 #include "../includes/structs.h"
 
-static float	distance(float x, float y);
 static float	fixed_dist(float delta_x, float delta_y, t_game *game);
 
 void	clear_image(t_game *game)
@@ -74,17 +73,14 @@ void	draw_pov(t_game *game, float ray_x, float ray_y, int i)
 	}
 }
 
-static float	distance(float x, float y)
-{
-	return (sqrt(x * x + y * y));
-}
-
 static float	fixed_dist(float delta_x, float delta_y, t_game *game)
 {
 	float	angle;
 	float	fix_dist;
+	float	sqr_hipothenuse;
 
 	angle = atan2(delta_y, delta_x) - game->player.angle;
-	fix_dist = distance(delta_x, delta_y) * cos(angle);
+	sqr_hipothenuse = delta_x * delta_x + delta_y * delta_y;
+	fix_dist = sqrt(sqr_hipothenuse) * cos(angle);
 	return (fix_dist);
 }
