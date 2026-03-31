@@ -12,15 +12,12 @@ int	main(int argc, char **argv)
 	img = init_struct();
 	parse_cub_file(argv[1], img);
 	print_parse(img);
-	//rendering
-	//init_game(&game);
-	//game.map = img->map->grid;
+	//init_game(&game, img);
 	//mlx_hook(game.win, DestroyNotify, NoEventMask, &ft_exitgame, &game);
 	//mlx_hook(game.win, KeyPress, KeyPressMask, key_press, &game);
 	//mlx_hook(game.win, KeyRelease, KeyReleaseMask, key_release, &game.player);
 	//mlx_loop_hook(game.mlx, draw_loop, &game);
 	//mlx_loop(game.mlx);
-	//free(game.map);
 	free_all(img);
 	return (0);
 }

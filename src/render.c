@@ -6,42 +6,38 @@
 /*   By: clumertz <clumertz@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 15:00:35 by adpinhei          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2026/03/26 19:52:08 by clumertz         ###   ########.fr       */
-=======
-/*   Updated: 2026/03/31 16:54:05 by adpinhei         ###   ########.fr       */
->>>>>>> rendering
+/*   Updated: 2026/03/31 18:50:24 by clumertz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 #include "../includes/structs.h"
 
-/*
-char	**get_map(void)
-{
-	char	**map;
+// char	**get_map(void)
+// {
+// 	char	**map;
 
-	map = malloc(sizeof(char *) * 11);
-	map[0] = "11111111111111111";
-	map[1] = "10000000000000001";
-	map[2] = "10000000000000001";
-	map[3] = "10000010101000001";
-	map[4] = "10000000000000001";
-	map[5] = "10000000000000001";
-	map[6] = "10000000000000001";
-	map[7] = "10000000000000001";
-	map[8] = "10000000000000001";
-	map[9] = "11111111111111111";
-	map[10] = NULL;
-	return (map);
-}*/
+// 	map = malloc(sizeof(char *) * 11);
+// 	map[0] = "11111111111111111";
+// 	map[1] = "10000000000000001";
+// 	map[2] = "10000000000000001";
+// 	map[3] = "10000010000000001";
+// 	map[4] = "10010000000000001";
+// 	map[5] = "10000000000000001";
+// 	map[6] = "10001010000000001";
+// 	map[7] = "10001000100100001";
+// 	map[8] = "10000000000000001";
+// 	map[9] = "11111111111111111";
+// 	map[10] = NULL;
+// 	return (map);
+// }
 
-void	init_game(t_game *game)
+void	init_game(t_game *game, t_img *img)
 {
 	if (!game)
 		return ;
-	init_player(&game->player);
+	init_player(&game->player, img);
+	game->map = img->map->grid;
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "CUB3D");
 	game->img = mlx_new_image(game->mlx, WIDTH, HEIGHT);
@@ -57,3 +53,16 @@ int	ft_exitgame(t_game *game)
 	return (0);
 }
 
+// int	main(void)
+// {
+// 	t_game	game;
+
+// 	init_game(&game);
+// 	mlx_hook(game.win, DestroyNotify, NoEventMask, &ft_exitgame, &game);
+// 	mlx_hook(game.win, KeyPress, KeyPressMask, key_press, &game);
+// 	mlx_hook(game.win, KeyRelease, KeyReleaseMask, key_release, &game.player);
+// 	mlx_loop_hook(game.mlx, draw_loop, &game);
+// 	mlx_loop(game.mlx);
+// 	free(game.map);
+// 	return (0);
+// }

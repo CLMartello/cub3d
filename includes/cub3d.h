@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: clumertz <clumertz@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/02 19:16:07 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/31 18:01:37 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/03/31 18:33:17 by clumertz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # endif
 
 # include "../minilibx-linux/mlx.h"
-//# include <X11/keysym.h>
-//# include <X11/X.h>
+# include <X11/keysym.h>
+# include <X11/X.h>
 # include <math.h>
 # include <stdbool.h>
 # include <stdlib.h>

@@ -76,4 +76,6 @@ void	print_parse(t_img *img)
 		printf("%s\n", img->map->grid[i]);
 		i++;
 	}
+	printf("Posicao x player, %d\n", img->map->player_x);
+	printf("Posicao y player, %d\n", img->map->player_y);
 }
