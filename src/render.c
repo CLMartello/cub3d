@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 15:00:35 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/31 19:58:58 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/03/31 20:07:29 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	init_game(t_game *game, t_img *img)
 	if (!game)
 		return ;
 	init_player(&game->player, img);
+	game->img_struct = img;
 	game->map = img->map->grid;
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, WIDTH, HEIGHT, "CUB3D");
@@ -31,6 +32,8 @@ int	ft_exitgame(t_game *game)
 {
 	if (!game)
 		exit (0);
+	if (game->img_struct)
+		free_all(game->img_struct);
 	if (game->img)
 		mlx_destroy_image(game->mlx, game->img);
 	if (game->win)
