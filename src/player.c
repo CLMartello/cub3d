@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 16:06:33 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/31 16:55:47 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/03/31 17:11:21 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,32 +64,22 @@ static void	move_or_collide(float new_x, float new_y, t_game *game)
 }
 static void	move_utils(t_game *game, float c_ang, float s_ang, int speed)
 {
-	float		new_x;
-	float		new_y;
+	t_player	*player;
+	float		cos_speed;
+	float		sin_speed;
 
-	new_x = game->player.x;
-	new_y = game->player.y;
+	player = &game->player;
+	cos_speed = c_ang * speed;
+	sin_speed = s_ang * speed;
 	if (game && game->player.key_up)
-	{
-		new_x = game->player.x + c_ang * speed; //pass this as a parameter already
-		new_y = game->player.y + s_ang * speed;
-	}
+		move_or_collide(player->x + cos_speed, player->y + sin_speed, game);
 	if (game && game->player.key_down)
-	{
-		new_x = game->player.x - c_ang * speed;
-		new_y = game->player.y - s_ang * speed;
-	}
+		move_or_collide(player->x - cos_speed, player->y - sin_speed, game);
 	if (game && game->player.key_left)
-	{
-		new_x = game->player.x + s_ang * speed;
-		new_y = game->player.y - c_ang * speed;
-	}
+		move_or_collide(player->x + sin_speed, player->y - cos_speed, game);
 	if (game && game->player.key_right)
-	{
-		new_x = game->player.x - s_ang * speed;
-		new_y = game->player.y + c_ang * speed;
-	}
-	move_or_collide(new_x, new_y, game);
+		move_or_collide(player->x - sin_speed, player->y + cos_speed, game);
+	player = NULL;
 }
 
 int	key_press(int keycode, t_game *game)
