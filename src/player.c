@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 16:06:33 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/31 17:57:56 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/03/31 18:12:17 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	move_player(t_player *player, t_game *game)
 	sin_angle = sin(player->angle);
 	move_utils(game, cos_angle, sin_angle, speed);
 }
+
 static void	move_or_collide(float new_x, float new_y, t_game *game)
 {
 	t_player	*player;
@@ -68,6 +69,7 @@ static void	move_or_collide(float new_x, float new_y, t_game *game)
 		player->x = prev_x;
 	player = NULL;
 }
+
 static void	move_utils(t_game *game, float c_ang, float s_ang, int speed)
 {
 	t_player	*player;
