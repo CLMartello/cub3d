@@ -6,7 +6,7 @@
 #    By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/26 15:24:18 by adpinhei          #+#    #+#              #
-#    Updated: 2026/04/01 14:24:35 by adpinhei         ###   ########.fr        #
+#    Updated: 2026/04/01 16:04:58 by adpinhei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -113,7 +113,6 @@ valgrind: $(NAME)
 	@valgrind --leak-check=full \
 	--show-leak-kinds=all \
 	--track-origins=yes \
-	--suppressions=mlx.supp \
 	./$(NAME) $(PARAM)
 test: $(NAME)
 	@echo "$(YELLOW)Testing with$(RESET) $(PARAM)"

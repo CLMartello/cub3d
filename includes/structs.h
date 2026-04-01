@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 16:01:43 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/31 20:05:41 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/04/01 16:24:18 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ enum e_erro_identifier
 	ERR_TEXT,
 	ERR_RGB,
 	ERR_MAP,
+	ERR_GAME,
+	ERR_WALL_TEX,
 };
 
 enum e_player_orientation_identifier
@@ -77,6 +79,16 @@ typedef struct s_player
 	bool	right_rotate;
 }	t_player;
 
+typedef struct s_tex
+{
+	void	*img;
+	char	*data;
+	int		width;
+	int		height;
+	int		bpp;
+	int		size_line;
+}	t_tex;
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -88,6 +100,10 @@ typedef struct s_game
 	int			endian;
 	char		**map;
 	t_player	player;
+	t_tex		*n_wall;
+	t_tex		*s_wall;
+	t_tex		*e_wall;
+	t_tex		*w_wall;
 	t_img		*img_struct;
 }	t_game;
 

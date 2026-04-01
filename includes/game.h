@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 15:19:08 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/04/01 14:43:21 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/04/01 15:53:14 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	put_pixel(t_game *game, int x, int y, int color);
 void	draw_pov(t_game *game, float ray_x, float ray_y, int i);
 
 bool	touch(float px, float py, t_game *game);
-void	init_game(t_game *game, t_img *img);
+int		init_game(t_game *game, t_img *img);
 
 
 /* ************************************************************************** */
