@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 15:00:35 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/04/01 16:37:14 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/04/01 17:01:58 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 static int	init_textures(t_game *game, t_img *img);
 static int	load_textures(t_game *game, t_img *img);
+static int	tex_addr(t_game *game);
 
 int	init_game(t_game *game, t_img *img)
 {
@@ -73,6 +74,27 @@ static int	load_textures(t_game *game, t_img *img)
 		printf("Unable to load textures into memory\n");
 		return (ERR_WALL_TEX);
 	}
+	if (tex_addr(game))
+	{
+		printf("Unable to store texture data address\n");
+		return (ERR_WALL_TEX);
+	}
+	return (0);
+}
+
+static int	tex_addr(t_game *game)
+{
+	game->n_wall->data = mlx_get_data_addr(game->mlx, &game->n_wall->bpp, \
+&game->n_wall->size_line, &game->endian);
+	game->s_wall->data = mlx_get_data_addr(game->mlx, &game->s_wall->bpp, \
+&game->s_wall->size_line, &game->endian);
+	game->e_wall->data = mlx_get_data_addr(game->mlx, &game->e_wall->bpp, \
+&game->e_wall->size_line, &game->endian);
+	game->w_wall->data = mlx_get_data_addr(game->mlx, &game->w_wall->bpp, \
+&game->w_wall->size_line, &game->endian);
+	if (!game->n_wall->data || !game->s_wall->data || \
+!game->e_wall->data || !game->w_wall->data)
+		return (1);
 	return (0);
 }
 
