@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 16:20:41 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/04/01 14:43:21 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/04/01 15:21:57 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ void	draw_pov(t_game *game, float ray_x, float ray_y, int i)
 	end = start_y + height;
 	while (start_y < end)
 	{
-		put_pixel(game, i, start_y, 0x0000FF);
+		if (player)
+		put_pixel(game, i, start_y, 0x005000);
 		start_y++;
 	}
 }
