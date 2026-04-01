@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 16:20:41 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/31 20:18:06 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/04/01 14:43:21 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,30 @@
 
 static float	fixed_dist(float delta_x, float delta_y, t_game *game);
 
-void	clear_image(t_game *game)
+void	draw_background(t_game *game)
 {
 	int	y;
 	int	x;
+	int	floor;
+	int	ceiling;
 
+	floor = 246524; //update to *game->img->floor
+	ceiling = 7026390;
 	y = -1;
 	while (++y < HEIGHT)
 	{
-		x = -1;
-		while (++x < WIDTH)
-			put_pixel(game, x, y, 0.000000);
+		if (y < HEIGHT / 2)
+		{
+			x = -1;
+			while (++x < WIDTH)
+				put_pixel(game, x, y, floor);
+		}
+		else
+		{
+			x = -1;
+			while (++x < WIDTH)
+				put_pixel(game, x, y, ceiling);
+		}
 	}
 }
 

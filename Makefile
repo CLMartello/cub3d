@@ -6,7 +6,7 @@
 #    By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/26 15:24:18 by adpinhei          #+#    #+#              #
-#    Updated: 2026/03/31 20:17:15 by adpinhei         ###   ########.fr        #
+#    Updated: 2026/04/01 14:24:35 by adpinhei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ NAME := cub3D
 
 CC := cc
 
-PARAM :=
+PARAM := files_cub/conf_ok3.cub
 
 ###############################################################################
 #                                mlx Flags                                    #
@@ -114,6 +114,9 @@ valgrind: $(NAME)
 	--show-leak-kinds=all \
 	--track-origins=yes \
 	--suppressions=mlx.supp \
+	./$(NAME) $(PARAM)
+test: $(NAME)
+	@echo "$(YELLOW)Testing with$(RESET) $(PARAM)"
 	./$(NAME) $(PARAM)
 
 gdb: $(NAME)

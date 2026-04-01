@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 15:19:08 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/31 19:36:05 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/04/01 14:43:21 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		ft_exitgame(t_game *game);
 
 void	move_player(t_player *player, t_game *game);
 void	init_player(t_player *player, t_img *img);
-void	clear_image(t_game *game);
+void	draw_background(t_game *game);
 void	put_pixel(t_game *game, int x, int y, int color);
 void	draw_pov(t_game *game, float ray_x, float ray_y, int i);
 
