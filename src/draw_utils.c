@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 16:20:41 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/04/02 19:18:14 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/04/02 19:46:53 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,8 @@ void	draw_pov(t_game *game, float dist, int side, float ray_dir_x, float ray_dir
 		tex_x = tex->width - 1;
 
 	/* Flip texture horizontally so wall sides face correctly */
-	if ((side == 0 && ray_dir_x > 0) || (side == 1 && ray_dir_y < 0))
-		tex_x = tex->width - tex_x - 1;
+	if ((side == 0 && ray_dir_x < 0) || (side == 1 && ray_dir_y > 0))
+    	tex_x = tex->width - tex_x - 1;
 
 	step = (float)tex->height / (float)line_h;
 	tex_pos = (draw_start - HEIGHT / 2.0f + line_h / 2.0f) * step;
