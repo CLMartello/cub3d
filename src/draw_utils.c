@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 16:20:41 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/04/02 14:43:16 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/04/02 17:53:48 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,7 @@ void	draw_background(t_game *game)
 {
 	int	y;
 	int	x;
-	// int	floor;
-	// int	ceiling;
 
-	// floor = 246524; //update to *game->img->floor
-	// ceiling = 7026390;
 	y = -1;
 	while (++y < HEIGHT)
 	{
@@ -83,7 +79,7 @@ void	draw_pov(t_game *game, float ray_x, float ray_y, int i)
 	while (start_y < end)
 	{
 		if (player)
-		put_pixel(game, i, start_y, mock_color);
+			put_pixel(game, i, start_y, mock_color);
 		start_y++;
 	}
 }
