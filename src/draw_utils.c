@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 16:20:41 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/04/01 15:21:57 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/04/02 14:43:16 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ void	draw_background(t_game *game)
 {
 	int	y;
 	int	x;
-	int	floor;
-	int	ceiling;
+	// int	floor;
+	// int	ceiling;
 
-	floor = 246524; //update to *game->img->floor
-	ceiling = 7026390;
+	// floor = 246524; //update to *game->img->floor
+	// ceiling = 7026390;
 	y = -1;
 	while (++y < HEIGHT)
 	{
@@ -31,13 +31,13 @@ void	draw_background(t_game *game)
 		{
 			x = -1;
 			while (++x < WIDTH)
-				put_pixel(game, x, y, floor);
+				put_pixel(game, x, y, game->img_struct->floor);
 		}
 		else
 		{
 			x = -1;
 			while (++x < WIDTH)
-				put_pixel(game, x, y, ceiling);
+				put_pixel(game, x, y, game->img_struct->ceiling);
 		}
 	}
 }
@@ -54,16 +54,16 @@ bool	touch(float px, float py, t_game *game)
 	return (false);
 }
 
-void	put_pixel(t_game *game, int x, int y, int color)
+void	put_pixel(t_game *game, int x, int y, int *color)
 {
 	int	index;
 
-	if (!game || x >= WIDTH || x < 0 || y >= HEIGHT || y < 0)
+	if (!game || x >= WIDTH || x < 0 || y >= HEIGHT || y < 0 || !color)
 		return ;
 	index = y * game->size_line + x * game->bpp / 8;
-	game->data[index] = color & 0xFF;
-	game->data[index + 1] = (color >> 8) & 0xFF;
-	game->data[index + 2] = (color >> 16) & 0xFF;
+	game->data[index] = color[2];
+	game->data[index + 1] = color[1];
+	game->data[index + 2] = color[0];
 }
 
 void	draw_pov(t_game *game, float ray_x, float ray_y, int i)
@@ -73,6 +73,7 @@ void	draw_pov(t_game *game, float ray_x, float ray_y, int i)
 	t_player	*player;
 	int			start_y;
 	int			end;
+	int			mock_color[3] = {0, 0, 255};
 
 	player = &game->player;
 	dist = fixed_dist(ray_x - player->x, ray_y - player->y, game);
@@ -82,7 +83,7 @@ void	draw_pov(t_game *game, float ray_x, float ray_y, int i)
 	while (start_y < end)
 	{
 		if (player)
-		put_pixel(game, i, start_y, 0x005000);
+		put_pixel(game, i, start_y, mock_color);
 		start_y++;
 	}
 }
