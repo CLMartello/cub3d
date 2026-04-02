@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 15:00:35 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/04/01 17:01:58 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/04/02 18:50:33 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ static int	load_textures(t_game *game, t_img *img)
 &game->e_wall->width, &game->e_wall->height);
 	game->w_wall->img = mlx_xpm_file_to_image(game->mlx, img->w_wall, \
 &game->w_wall->width, &game->w_wall->height);
-	if (!game->n_wall || !game->s_wall || !game->e_wall || !game->w_wall)
+	if (!game->n_wall->img || !game->s_wall->img || \
+!game->e_wall->img || !game->w_wall->img)
 	{
 		printf("Unable to load textures into memory\n");
 		return (ERR_WALL_TEX);
@@ -84,13 +85,13 @@ static int	load_textures(t_game *game, t_img *img)
 
 static int	tex_addr(t_game *game)
 {
-	game->n_wall->data = mlx_get_data_addr(game->mlx, &game->n_wall->bpp, \
+	game->n_wall->data = mlx_get_data_addr(game->n_wall->img, &game->n_wall->bpp, \
 &game->n_wall->size_line, &game->endian);
-	game->s_wall->data = mlx_get_data_addr(game->mlx, &game->s_wall->bpp, \
+	game->s_wall->data = mlx_get_data_addr(game->s_wall->img, &game->s_wall->bpp, \
 &game->s_wall->size_line, &game->endian);
-	game->e_wall->data = mlx_get_data_addr(game->mlx, &game->e_wall->bpp, \
+	game->e_wall->data = mlx_get_data_addr(game->e_wall->img, &game->e_wall->bpp, \
 &game->e_wall->size_line, &game->endian);
-	game->w_wall->data = mlx_get_data_addr(game->mlx, &game->w_wall->bpp, \
+	game->w_wall->data = mlx_get_data_addr(game->w_wall->img, &game->w_wall->bpp, \
 &game->w_wall->size_line, &game->endian);
 	if (!game->n_wall->data || !game->s_wall->data || \
 !game->e_wall->data || !game->w_wall->data)

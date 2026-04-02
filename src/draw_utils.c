@@ -6,14 +6,14 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 16:20:41 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/04/02 17:53:48 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/04/02 19:18:14 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 #include "../includes/structs.h"
 
-static float	fixed_dist(float delta_x, float delta_y, t_game *game);
+//static float	fixed_dist(float delta_x, float delta_y, t_game *game);
 
 void	draw_background(t_game *game)
 {
@@ -61,37 +61,109 @@ void	put_pixel(t_game *game, int x, int y, int *color)
 	game->data[index + 1] = color[1];
 	game->data[index + 2] = color[0];
 }
-
-void	draw_pov(t_game *game, float ray_x, float ray_y, int i)
+void	draw_pov(t_game *game, float dist, int side, float ray_dir_x, float ray_dir_y, int i)
 {
-	float		dist;
-	float		height;
-	t_player	*player;
-	int			start_y;
-	int			end;
-	int			mock_color[3] = {0, 0, 255};
+	t_tex			*tex;
+	float			wall_x;
+	int				line_h;
+	int				draw_start;
+	int				draw_end;
+	int				tex_x;
+	int				tex_y;
+	float			step;
+	float			tex_pos;
+	int				y;
+	unsigned int	color;
 
-	player = &game->player;
-	dist = fixed_dist(ray_x - player->x, ray_y - player->y, game);
-	height = (BLOCK / dist) * (WIDTH / 2);
-	start_y = (HEIGHT - height) / 2;
-	end = start_y + height;
-	while (start_y < end)
+	if (dist < 0.0001f)
+		dist = 0.0001f;
+
+	if (side == 0)
+		tex = (ray_dir_x > 0) ? game->e_wall : game->w_wall;
+	else
+		tex = (ray_dir_y > 0) ? game->s_wall : game->n_wall;
+
+	/* hit point on the wall in map-cell units */
+	if (side == 0)
+		wall_x = (game->player.y / (float)BLOCK) + dist * ray_dir_y;
+	else
+		wall_x = (game->player.x / (float)BLOCK) + dist * ray_dir_x;
+	wall_x -= floorf(wall_x);
+
+	line_h = (int)(HEIGHT / dist);
+	if (line_h < 1)
+		line_h = 1;
+
+	draw_start = -line_h / 2 + HEIGHT / 2;
+	draw_end = line_h / 2 + HEIGHT / 2;
+
+	if (draw_start < 0)
+		draw_start = 0;
+	if (draw_end >= HEIGHT)
+		draw_end = HEIGHT - 1;
+
+	tex_x = (int)(wall_x * (float)tex->width);
+	if (tex_x < 0)
+		tex_x = 0;
+	if (tex_x >= tex->width)
+		tex_x = tex->width - 1;
+
+	/* Flip texture horizontally so wall sides face correctly */
+	if ((side == 0 && ray_dir_x > 0) || (side == 1 && ray_dir_y < 0))
+		tex_x = tex->width - tex_x - 1;
+
+	step = (float)tex->height / (float)line_h;
+	tex_pos = (draw_start - HEIGHT / 2.0f + line_h / 2.0f) * step;
+
+	y = draw_start;
+	while (y <= draw_end)
 	{
-		if (player)
-			put_pixel(game, i, start_y, mock_color);
-		start_y++;
+		tex_y = (int)tex_pos;
+		if (tex_y < 0)
+			tex_y = 0;
+		if (tex_y >= tex->height)
+			tex_y = tex->height - 1;
+
+		color = *(unsigned int *)(tex->data
+				+ (tex_y * tex->size_line + tex_x * (tex->bpp / 8)));
+
+		*(unsigned int *)(game->data
+				+ (y * game->size_line + i * (game->bpp / 8))) = color;
+
+		tex_pos += step;
+		y++;
 	}
 }
+// void	draw_pov(t_game *game, float ray_x, float ray_y, int i)
+// {
+// 	float		dist;
+// 	float		height;
+// 	t_player	*player;
+// 	int			start_y;
+// 	int			end;
+// 	int			mock_color[3] = {0, 0, 255};
 
-static float	fixed_dist(float delta_x, float delta_y, t_game *game)
-{
-	float	angle;
-	float	fix_dist;
-	float	sqr_hipothenuse;
+// 	player = &game->player;
+// 	dist = fixed_dist(ray_x - player->x, ray_y - player->y, game);
+// 	height = (BLOCK / dist) * (WIDTH / 2);
+// 	start_y = (HEIGHT - height) / 2;
+// 	end = start_y + height;
+// 	while (start_y < end)
+// 	{
+// 		if (player)
+// 			put_pixel(game, i, start_y, mock_color);
+// 		start_y++;
+// 	}
+// }
 
-	angle = atan2(delta_y, delta_x) - game->player.angle;
-	sqr_hipothenuse = delta_x * delta_x + delta_y * delta_y;
-	fix_dist = sqrt(sqr_hipothenuse) * cos(angle);
-	return (fix_dist);
-}
+// static float	fixed_dist(float delta_x, float delta_y, t_game *game)
+// {
+// 	float	angle;
+// 	float	fix_dist;
+// 	float	sqr_hipothenuse;
+
+// 	angle = atan2(delta_y, delta_x) - game->player.angle;
+// 	sqr_hipothenuse = delta_x * delta_x + delta_y * delta_y;
+// 	fix_dist = sqrt(sqr_hipothenuse) * cos(angle);
+// 	return (fix_dist);
+// }

@@ -11,7 +11,7 @@ int	main(int argc, char **argv)
 	verify_arg(argv[1]);
 	img = init_struct();
 	parse_cub_file(argv[1], img);
-	print_parse(img);
+	//print_parse(img);
 	if (init_game(&game, img))
 	{
 		free_all(img);
