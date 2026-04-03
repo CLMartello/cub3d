@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 17:08:19 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/04/03 18:46:34 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/04/03 19:04:20 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	init_dda(t_player *player, t_dda *dda, t_ray *ray);
 static void	init_dda_utils(t_dda *dda, t_ray *ray);
 static void	dda_core(t_game *game, t_dda *dda);
 
+/*Performs the DDA algorithm and calls draw_tex*/
 void	dda(t_game *game, t_ray *ray, int col)
 {
 	t_player	*player;
@@ -38,6 +39,8 @@ void	dda(t_game *game, t_ray *ray, int col)
 	draw_tex(game, &dda, ray, col);
 }
 
+/*Makes the calculations for DDA based on the player's positions and 
+the ray cast*/
 static void	init_dda(t_player *player, t_dda *dda, t_ray *ray)
 {
 	if (!player || !dda || !ray)
@@ -58,6 +61,7 @@ static void	init_dda(t_player *player, t_dda *dda, t_ray *ray)
 	init_dda_utils(dda, ray);
 }
 
+/*Calculates DDA'a side distance and each axis' step*/
 static void	init_dda_utils(t_dda *dda, t_ray *ray)
 {
 	if (!dda || !ray)
@@ -84,6 +88,7 @@ static void	init_dda_utils(t_dda *dda, t_ray *ray)
 	}
 }
 
+/*Figures out how rays are hitting walls*/
 static void	dda_core(t_game *game, t_dda *dda)
 {
 	if (!game || !dda)

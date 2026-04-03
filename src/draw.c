@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 16:17:27 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/04/03 18:12:39 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/04/03 19:01:13 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 static void	init_ray(t_player *p, t_ray *ray);
 
+/*Starts the drawing process
+Gathers ray casting info
+Calls DDA*/
 int	draw_loop(t_game *game)
 {
 	t_player	*p;
@@ -41,6 +44,7 @@ int	draw_loop(t_game *game)
 	return (0);
 }
 
+/*Draws the floor and the ceiling*/
 void	draw_background(t_game *game)
 {
 	int	y;
@@ -67,6 +71,7 @@ void	draw_background(t_game *game)
 	}
 }
 
+/*Initializes the ray casted by the player*/
 static void	init_ray(t_player *p, t_ray *ray)
 {
 	ray->dir_x = cosf(p->angle);

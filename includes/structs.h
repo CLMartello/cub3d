@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 16:01:43 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/04/03 18:54:38 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/04/03 18:58:31 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ typedef struct s_img
 	t_map	*map;
 }		t_img;
 
+/*Holds the player's info*/
+
 typedef struct s_player
 {
 	float	x;
@@ -77,6 +79,8 @@ typedef struct s_player
 	bool	right_rotate;
 }	t_player;
 
+/*Holds the texture's info*/
+
 typedef struct s_tex
 {
 	void	*img;
@@ -86,6 +90,8 @@ typedef struct s_tex
 	int		bpp;
 	int		size_line;
 }	t_tex;
+
+/*Holds the cast ray's info*/
 
 typedef struct s_ray
 {
@@ -97,6 +103,8 @@ typedef struct s_ray
 	float	ray_dir_x;
 	float	ray_dir_y;
 }	t_ray;
+
+/*Holds the info for column calculations*/
 
 typedef struct s_column
 {
@@ -111,6 +119,8 @@ typedef struct s_column
 	int		y;
 	int		tex_index;
 }	t_column;
+
+/*Holds the info for DDA calculations*/
 
 typedef struct s_dda
 {
@@ -127,6 +137,8 @@ typedef struct s_dda
 	float	delta_dist_y;
 	float	perp_dist;
 }	t_dda;
+
+/*Game loop master struct*/
 
 typedef struct s_game
 {

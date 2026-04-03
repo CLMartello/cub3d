@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 16:20:41 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/04/03 18:50:41 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/04/03 19:06:23 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static float	get_wall_x(t_game *game, t_dda *dda, t_ray *ray);
 static void		compute_line(int *line_h, int *start, int *end, float dist);
 static void		draw_column(t_column *c, t_game *game, int col);
 
+/*Orchestrates the texture drawing*/
 void	draw_tex(t_game *game, t_dda *dda, t_ray *ray, int col)
 {
 	t_column	c;
@@ -37,6 +38,7 @@ void	draw_tex(t_game *game, t_dda *dda, t_ray *ray, int col)
 	draw_column(&c, game, col);
 }
 
+/*Identifies what texture to print*/
 static t_tex	*get_texture(t_game *game, t_dda *dda, t_ray *ray)
 {
 	if (dda->side == 0)
@@ -53,6 +55,7 @@ static t_tex	*get_texture(t_game *game, t_dda *dda, t_ray *ray)
 	}
 }
 
+/*Identifies the point at which the ray touches the wall*/
 static float	get_wall_x(t_game *game, t_dda *dda, t_ray *ray)
 {
 	float	wall_x;
@@ -68,6 +71,7 @@ static float	get_wall_x(t_game *game, t_dda *dda, t_ray *ray)
 	return (wall_x - (floorf(wall_x)));
 }
 
+/*Calculates the parallelism between the wall and the texture*/
 static void	compute_line(int *line_h, int *start, int *end, float dist)
 {
 	if (dist < 0.0001f)
@@ -83,6 +87,7 @@ static void	compute_line(int *line_h, int *start, int *end, float dist)
 		*end = HEIGHT - 1;
 }
 
+/*Draw the actual column by calling put_pixel*/
 static void	draw_column(t_column *c, t_game *game, int col)
 {
 	while (c->y <= c->end)
