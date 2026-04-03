@@ -6,7 +6,7 @@
 #    By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/26 15:24:18 by adpinhei          #+#    #+#              #
-#    Updated: 2026/04/01 16:04:58 by adpinhei         ###   ########.fr        #
+#    Updated: 2026/04/03 17:08:50 by adpinhei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,8 @@ BUILD_DIR := build
 #                               Source Files                                  #
 ###############################################################################
 SRC_FILES := parse.c get_next_line.c str_utils.c error.c init.c parse_map.c \
-			parse_conf.c render.c player.c draw.c draw_utils.c main.c keys.c
+			parse_conf.c exit_game.c player.c draw.c draw_utils.c main.c \
+			keys.c init_game.c dda.c
 
 ###############################################################################
 #                               Object Files                                  #
@@ -109,6 +110,7 @@ norm:
 	@norminette -R CheckForbiddenSourceHeader
 
 valgrind: $(NAME)
+	@clear
 	@echo "$(YELLOW)Valgrind Report$(RESET)"
 	@valgrind --leak-check=full \
 	--show-leak-kinds=all \

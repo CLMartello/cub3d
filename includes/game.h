@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 15:19:08 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/04/02 18:51:28 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/04/03 17:09:25 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,12 @@ int		key_press(int keycode, t_game *game);
 int		draw_loop(t_game *game);
 int		ft_exitgame(t_game *game);
 
-
 void	move_player(t_player *player, t_game *game);
 void	init_player(t_player *player, t_img *img);
 void	draw_background(t_game *game);
 void	put_pixel(t_game *game, int x, int y, int *color);
-void draw_pov(t_game *game, float dist, int side, float rd_x, float rd_y, int i);
-
-//void	draw_pov(t_game *game, float ray_x, float ray_y, int i);
+void	draw_pov(t_game *game, float dist, int side, float rd_x, float rd_y, int i);
+void	dda(t_game *game, t_ray *ray, int col);
 
 bool	touch(float px, float py, t_game *game);
 int		init_game(t_game *game, t_img *img);

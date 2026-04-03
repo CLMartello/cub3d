@@ -6,37 +6,12 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 16:20:41 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/04/02 19:46:53 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/04/03 17:01:41 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 #include "../includes/structs.h"
-
-//static float	fixed_dist(float delta_x, float delta_y, t_game *game);
-
-void	draw_background(t_game *game)
-{
-	int	y;
-	int	x;
-
-	y = -1;
-	while (++y < HEIGHT)
-	{
-		if (y < HEIGHT / 2)
-		{
-			x = -1;
-			while (++x < WIDTH)
-				put_pixel(game, x, y, game->img_struct->floor);
-		}
-		else
-		{
-			x = -1;
-			while (++x < WIDTH)
-				put_pixel(game, x, y, game->img_struct->ceiling);
-		}
-	}
-}
 
 bool	touch(float px, float py, t_game *game)
 {
@@ -124,46 +99,11 @@ void	draw_pov(t_game *game, float dist, int side, float ray_dir_x, float ray_dir
 		if (tex_y >= tex->height)
 			tex_y = tex->height - 1;
 
-		color = *(unsigned int *)(tex->data
-				+ (tex_y * tex->size_line + tex_x * (tex->bpp / 8)));
+		color = *(unsigned int *)(tex->data + (tex_y * tex->size_line + tex_x * (tex->bpp / 8)));
 
-		*(unsigned int *)(game->data
-				+ (y * game->size_line + i * (game->bpp / 8))) = color;
+		*(unsigned int *)(game->data + (y * game->size_line + i * (game->bpp / 8))) = color;
 
 		tex_pos += step;
 		y++;
 	}
 }
-// void	draw_pov(t_game *game, float ray_x, float ray_y, int i)
-// {
-// 	float		dist;
-// 	float		height;
-// 	t_player	*player;
-// 	int			start_y;
-// 	int			end;
-// 	int			mock_color[3] = {0, 0, 255};
-
-// 	player = &game->player;
-// 	dist = fixed_dist(ray_x - player->x, ray_y - player->y, game);
-// 	height = (BLOCK / dist) * (WIDTH / 2);
-// 	start_y = (HEIGHT - height) / 2;
-// 	end = start_y + height;
-// 	while (start_y < end)
-// 	{
-// 		if (player)
-// 			put_pixel(game, i, start_y, mock_color);
-// 		start_y++;
-// 	}
-// }
-
-// static float	fixed_dist(float delta_x, float delta_y, t_game *game)
-// {
-// 	float	angle;
-// 	float	fix_dist;
-// 	float	sqr_hipothenuse;
-
-// 	angle = atan2(delta_y, delta_x) - game->player.angle;
-// 	sqr_hipothenuse = delta_x * delta_x + delta_y * delta_y;
-// 	fix_dist = sqrt(sqr_hipothenuse) * cos(angle);
-// 	return (fix_dist);
-// }

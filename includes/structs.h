@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 16:01:43 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/04/01 16:58:43 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/04/03 16:15:11 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,33 @@ typedef struct s_tex
 	int		bpp;
 	int		size_line;
 }	t_tex;
+
+typedef struct s_ray
+{
+	float	dir_x;
+	float	dir_y;
+	float	plane_x;
+	float	plane_y;
+	float	camera;
+	float	ray_dir_x;
+	float	ray_dir_y;
+}	t_ray;
+
+typedef struct s_dda
+{
+	int		map_x;
+	int		map_y;
+	int		step_x;
+	int		step_y;
+	int		side;
+	float	pos_x;
+	float	pos_y;
+	float	side_dist_x;
+	float	side_dist_y;
+	float	delta_dist_x;
+	float	delta_dist_y;
+	float	perp_dist;
+}	t_dda;
 
 typedef struct s_game
 {
