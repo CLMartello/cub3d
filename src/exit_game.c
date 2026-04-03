@@ -6,12 +6,14 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/23 15:00:35 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/04/03 17:06:57 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/04/03 18:53:16 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 #include "../includes/structs.h"
+
+static void	ft_clean_walls(t_game *game);
 
 int	ft_exitgame(t_game *game)
 {
@@ -21,6 +23,23 @@ int	ft_exitgame(t_game *game)
 	{
 		free_all(game->img_struct);
 	}
+	ft_clean_walls(game);
+	if (game->img)
+		mlx_destroy_image(game->mlx, game->img);
+	if (game->win)
+		mlx_destroy_window(game->mlx, game->win);
+	if (game->mlx)
+	{
+		mlx_destroy_display(game->mlx);
+		free(game->mlx);
+	}
+	exit (0);
+}
+
+static void	ft_clean_walls(t_game *game)
+{
+	if (!game)
+		return ;
 	if (game->n_wall)
 	{
 		mlx_destroy_image(game->mlx, game->n_wall->img);
@@ -41,14 +60,4 @@ int	ft_exitgame(t_game *game)
 		mlx_destroy_image(game->mlx, game->w_wall->img);
 		free(game->w_wall);
 	}
-	if (game->img)
-		mlx_destroy_image(game->mlx, game->img);
-	if (game->win)
-		mlx_destroy_window(game->mlx, game->win);
-	if (game->mlx)
-	{
-		mlx_destroy_display(game->mlx);
-		free(game->mlx);
-	}
-	exit (0);
 }

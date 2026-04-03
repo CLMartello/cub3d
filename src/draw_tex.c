@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_utils.c                                       :+:      :+:    :+:   */
+/*   draw_tex.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 16:20:41 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/04/03 18:46:29 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/04/03 18:50:41 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	draw_tex(t_game *game, t_dda *dda, t_ray *ray, int col)
 	c.wall_x = get_wall_x(game, dda, ray);
 	compute_line(&c.line_height, &c.start, &c.end, dda->perp_dist);
 	c.tex_x = (int)(c.wall_x * (float)c.tex->width);
-	if ((dda->side == 0 && ray->ray_dir_x < 0)
+	if ((dda->side == 0 && ray->ray_dir_x < 0) \
 || (dda->side == 1 && ray->ray_dir_y > 0))
 		c.tex_x = c.tex->width - c.tex_x - 1;
 	c.y = c.start;
@@ -87,13 +87,14 @@ static void	draw_column(t_column *c, t_game *game, int col)
 {
 	while (c->y <= c->end)
 	{
-		c->tex_y = (int)(((float)(c->y - HEIGHT / 2 + c->line_height / 2) /
-(float)c->line_height) * (float)c->tex->height);
+		c->tex_y = (int)(((float)(c->y - HEIGHT / 2 + c->line_height / 2) \
+/ (float)c->line_height) * (float)c->tex->height);
 		if (c->tex_y < 0)
 			c->tex_y = 0;
 		if (c->tex_y >= c->tex->height)
 			c->tex_y = c->tex->height - 1;
-		c->tex_index = c->tex_y * c->tex->size_line + c->tex_x * c->tex->bpp / 8;
+		c->tex_index = c->tex_y * c->tex->size_line + \
+c->tex_x * c->tex->bpp / 8;
 		c->color[0] = (unsigned char)c->tex->data[c->tex_index + 2];
 		c->color[1] = (unsigned char)c->tex->data[c->tex_index + 1];
 		c->color[2] = (unsigned char)c->tex->data[c->tex_index];

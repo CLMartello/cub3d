@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 15:19:08 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/04/03 18:46:43 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/04/03 18:55:13 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,16 @@ void	parse_rgb(t_img *img, int *rgb, int pos);
 /* Parse map */
 
 void	verify_map(t_img *img);
-int     ft_fill(char **map, int y, int x, int height);
+int		ft_fill(char **map, int y, int x, int height);
 int		is_map(t_img *img);
 
 /* ************************************************************************** */
 /*                                  Str utils                                 */
 /* ************************************************************************** */
 
-int	    ft_strlen(char *c);
-int	    ft_strchr(char *s, int c);
-int	    ft_strncmp(char *s1, char *s2, int n);
+int		ft_strlen(char *c);
+int		ft_strchr(char *s, int c);
+int		ft_strncmp(char *s1, char *s2, int n);
 char	*get_next_line(int fd);
 char	*get_line(char *str);
 int		ft_isspace(char c);
@@ -94,8 +94,6 @@ void	ft_error(t_img *img, int type_error);
 void	free_all(t_img *img);
 void	free_map(t_map *map);
 void	free_db_str(char **db_str);
-
-
 
 void	print_parse(t_img *img);
 

@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 17:05:06 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/04/03 17:06:10 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/04/03 18:50:07 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,14 +85,14 @@ static int	load_textures(t_game *game, t_img *img)
 
 static int	tex_addr(t_game *game)
 {
-	game->n_wall->data = mlx_get_data_addr(game->n_wall->img, &game->n_wall->bpp, \
-&game->n_wall->size_line, &game->endian);
-	game->s_wall->data = mlx_get_data_addr(game->s_wall->img, &game->s_wall->bpp, \
-&game->s_wall->size_line, &game->endian);
-	game->e_wall->data = mlx_get_data_addr(game->e_wall->img, &game->e_wall->bpp, \
-&game->e_wall->size_line, &game->endian);
-	game->w_wall->data = mlx_get_data_addr(game->w_wall->img, &game->w_wall->bpp, \
-&game->w_wall->size_line, &game->endian);
+	game->n_wall->data = mlx_get_data_addr(game->n_wall->img, \
+&game->n_wall->bpp, &game->n_wall->size_line, &game->endian);
+	game->s_wall->data = mlx_get_data_addr(game->s_wall->img, \
+&game->s_wall->bpp, &game->s_wall->size_line, &game->endian);
+	game->e_wall->data = mlx_get_data_addr(game->e_wall->img, \
+&game->e_wall->bpp, &game->e_wall->size_line, &game->endian);
+	game->w_wall->data = mlx_get_data_addr(game->w_wall->img, \
+&game->w_wall->bpp, &game->w_wall->size_line, &game->endian);
 	if (!game->n_wall->data || !game->s_wall->data || \
 !game->e_wall->data || !game->w_wall->data)
 		return (1);
