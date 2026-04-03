@@ -6,104 +6,98 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 16:20:41 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/04/03 17:01:41 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/04/03 18:46:29 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 #include "../includes/structs.h"
 
-bool	touch(float px, float py, t_game *game)
+static t_tex	*get_texture(t_game *game, t_dda *dda, t_ray *ray);
+static float	get_wall_x(t_game *game, t_dda *dda, t_ray *ray);
+static void		compute_line(int *line_h, int *start, int *end, float dist);
+static void		draw_column(t_column *c, t_game *game, int col);
+
+void	draw_tex(t_game *game, t_dda *dda, t_ray *ray, int col)
 {
-	int	x;
-	int	y;
+	t_column	c;
 
-	x = px / BLOCK;
-	y = py / BLOCK;
-	if (game->map[y][x] == '1')
-		return (true);
-	return (false);
-}
-
-void	put_pixel(t_game *game, int x, int y, int *color)
-{
-	int	index;
-
-	if (!game || x >= WIDTH || x < 0 || y >= HEIGHT || y < 0 || !color)
+	if (!game || !dda || !ray)
 		return ;
-	index = y * game->size_line + x * game->bpp / 8;
-	game->data[index] = color[2];
-	game->data[index + 1] = color[1];
-	game->data[index + 2] = color[0];
+	c.tex = get_texture(game, dda, ray);
+	if (!c.tex)
+		return ;
+	c.wall_x = get_wall_x(game, dda, ray);
+	compute_line(&c.line_height, &c.start, &c.end, dda->perp_dist);
+	c.tex_x = (int)(c.wall_x * (float)c.tex->width);
+	if ((dda->side == 0 && ray->ray_dir_x < 0)
+|| (dda->side == 1 && ray->ray_dir_y > 0))
+		c.tex_x = c.tex->width - c.tex_x - 1;
+	c.y = c.start;
+	draw_column(&c, game, col);
 }
-void	draw_pov(t_game *game, float dist, int side, float ray_dir_x, float ray_dir_y, int i)
-{
-	t_tex			*tex;
-	float			wall_x;
-	int				line_h;
-	int				draw_start;
-	int				draw_end;
-	int				tex_x;
-	int				tex_y;
-	float			step;
-	float			tex_pos;
-	int				y;
-	unsigned int	color;
 
+static t_tex	*get_texture(t_game *game, t_dda *dda, t_ray *ray)
+{
+	if (dda->side == 0)
+	{
+		if (ray->ray_dir_x > 0)
+			return (game->e_wall);
+		return (game->w_wall);
+	}
+	else
+	{
+		if (ray->ray_dir_y > 0)
+			return (game->s_wall);
+		return (game->n_wall);
+	}
+}
+
+static float	get_wall_x(t_game *game, t_dda *dda, t_ray *ray)
+{
+	float	wall_x;
+	float	pos_x;
+	float	pos_y;
+
+	pos_x = game->player.x / (float)BLOCK;
+	pos_y = game->player.y / (float)BLOCK;
+	if (dda->side == 0)
+		wall_x = pos_y + dda->perp_dist * ray->ray_dir_y;
+	else
+		wall_x = pos_x + dda->perp_dist * ray->ray_dir_x;
+	return (wall_x - (floorf(wall_x)));
+}
+
+static void	compute_line(int *line_h, int *start, int *end, float dist)
+{
 	if (dist < 0.0001f)
 		dist = 0.0001f;
+	*line_h = (int)(HEIGHT / dist);
+	if (*line_h < 1)
+		*line_h = 1;
+	*start = -(*line_h) / 2 + HEIGHT / 2;
+	*end = *line_h / 2 + HEIGHT / 2;
+	if (*start < 0)
+		*start = 0;
+	if (*end > HEIGHT)
+		*end = HEIGHT - 1;
+}
 
-	if (side == 0)
-		tex = (ray_dir_x > 0) ? game->e_wall : game->w_wall;
-	else
-		tex = (ray_dir_y > 0) ? game->s_wall : game->n_wall;
-
-	/* hit point on the wall in map-cell units */
-	if (side == 0)
-		wall_x = (game->player.y / (float)BLOCK) + dist * ray_dir_y;
-	else
-		wall_x = (game->player.x / (float)BLOCK) + dist * ray_dir_x;
-	wall_x -= floorf(wall_x);
-
-	line_h = (int)(HEIGHT / dist);
-	if (line_h < 1)
-		line_h = 1;
-
-	draw_start = -line_h / 2 + HEIGHT / 2;
-	draw_end = line_h / 2 + HEIGHT / 2;
-
-	if (draw_start < 0)
-		draw_start = 0;
-	if (draw_end >= HEIGHT)
-		draw_end = HEIGHT - 1;
-
-	tex_x = (int)(wall_x * (float)tex->width);
-	if (tex_x < 0)
-		tex_x = 0;
-	if (tex_x >= tex->width)
-		tex_x = tex->width - 1;
-
-	/* Flip texture horizontally so wall sides face correctly */
-	if ((side == 0 && ray_dir_x < 0) || (side == 1 && ray_dir_y > 0))
-    	tex_x = tex->width - tex_x - 1;
-
-	step = (float)tex->height / (float)line_h;
-	tex_pos = (draw_start - HEIGHT / 2.0f + line_h / 2.0f) * step;
-
-	y = draw_start;
-	while (y <= draw_end)
+static void	draw_column(t_column *c, t_game *game, int col)
+{
+	while (c->y <= c->end)
 	{
-		tex_y = (int)tex_pos;
-		if (tex_y < 0)
-			tex_y = 0;
-		if (tex_y >= tex->height)
-			tex_y = tex->height - 1;
-
-		color = *(unsigned int *)(tex->data + (tex_y * tex->size_line + tex_x * (tex->bpp / 8)));
-
-		*(unsigned int *)(game->data + (y * game->size_line + i * (game->bpp / 8))) = color;
-
-		tex_pos += step;
-		y++;
+		c->tex_y = (int)(((float)(c->y - HEIGHT / 2 + c->line_height / 2) /
+(float)c->line_height) * (float)c->tex->height);
+		if (c->tex_y < 0)
+			c->tex_y = 0;
+		if (c->tex_y >= c->tex->height)
+			c->tex_y = c->tex->height - 1;
+		c->tex_index = c->tex_y * c->tex->size_line + c->tex_x * c->tex->bpp / 8;
+		c->color[0] = (unsigned char)c->tex->data[c->tex_index + 2];
+		c->color[1] = (unsigned char)c->tex->data[c->tex_index + 1];
+		c->color[2] = (unsigned char)c->tex->data[c->tex_index];
+		put_pixel(game, col, c->y, c->color);
+		c->y++;
 	}
 }

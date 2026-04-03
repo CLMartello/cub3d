@@ -6,7 +6,7 @@
 #    By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/26 15:24:18 by adpinhei          #+#    #+#              #
-#    Updated: 2026/04/03 17:08:50 by adpinhei         ###   ########.fr        #
+#    Updated: 2026/04/03 18:35:50 by adpinhei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,7 +50,7 @@ BUILD_DIR := build
 ###############################################################################
 SRC_FILES := parse.c get_next_line.c str_utils.c error.c init.c parse_map.c \
 			parse_conf.c exit_game.c player.c draw.c draw_utils.c main.c \
-			keys.c init_game.c dda.c
+			keys.c init_game.c dda.c put_pixel.c
 
 ###############################################################################
 #                               Object Files                                  #

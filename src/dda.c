@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/03 17:08:19 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/04/03 17:13:39 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/04/03 18:46:34 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ void	dda(t_game *game, t_ray *ray, int col)
 (1.0f - dda.step_y) / 2.0f) / ray->ray_dir_y;
 	if (dda.perp_dist < 0.0001f)
 		dda.perp_dist = 0.0001f;
-	draw_pov(game, dda.perp_dist, dda.side, ray->ray_dir_x, \
-ray->ray_dir_y, col);
+	draw_tex(game, &dda, ray, col);
 }
 
 static void	init_dda(t_player *player, t_dda *dda, t_ray *ray)

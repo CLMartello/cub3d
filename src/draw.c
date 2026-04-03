@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 16:17:27 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/04/03 17:11:51 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/04/03 18:12:39 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	draw_loop(t_game *game)
 		i++;
 	}
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
+	p = NULL;
 	return (0);
 }
 

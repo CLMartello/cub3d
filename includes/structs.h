@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 16:01:43 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/04/03 16:15:11 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/04/03 18:32:12 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,20 @@ typedef struct s_ray
 	float	ray_dir_x;
 	float	ray_dir_y;
 }	t_ray;
+
+typedef struct s_column
+{
+	t_tex	*tex;
+	float	wall_x;
+	int		line_height;
+	int		start;
+	int		end;
+	int		tex_x;
+	int		tex_y;
+	int		color[3];
+	int		y;
+	int		tex_index;
+}	t_column;
 
 typedef struct s_dda
 {
