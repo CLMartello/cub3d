@@ -6,7 +6,7 @@
 /*   By: clumertz <clumertz@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 19:37:29 by clumertz          #+#    #+#             */
-/*   Updated: 2026/03/31 19:38:01 by clumertz         ###   ########.fr       */
+/*   Updated: 2026/04/04 20:16:43 by clumertz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,19 @@ void	verify_arg(char *line)
 		ft_error(NULL, ERR_ARGS);
 }
 
-void	verify_text(t_img *img)
+void	verify_conf(t_img *img)
 {
+	int	i;
+
+	i = 0;
 	if (!img->n_wall || !img->s_wall || !img->w_wall || !img->e_wall)
 		ft_error(img, ERR_TEXT);
+	while (i < 3)
+	{
+		if (img->floor[i] == -1 || img->ceiling[i] == -1)
+			ft_error(img, ERR_RGB);
+		i++;
+	}
 }
 
 void	start_map(t_img *img)
@@ -32,6 +41,7 @@ void	start_map(t_img *img)
 	char	**new_map;
 	int		i;
 
+	verify_conf(img);
 	new_map = malloc(sizeof(char *) * (img->map->height + 2));
 	if (!new_map)
 		ft_error(img, ERR_MALLOC);
@@ -91,7 +101,7 @@ void	parse_cub_file(char *file, t_img *img)
 	{
 		is_map(img);
 		if (img->map->found == FALSE)
-			verify_conf(img);
+			get_conf(img);
 		else
 			valid_map(img);
 		free(img->line);

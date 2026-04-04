@@ -6,7 +6,7 @@
 /*   By: clumertz <clumertz@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 19:38:24 by clumertz          #+#    #+#             */
-/*   Updated: 2026/03/31 19:41:55 by clumertz         ###   ########.fr       */
+/*   Updated: 2026/04/04 20:16:52 by clumertz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,24 +74,4 @@ int	is_map(t_img *img)
 			break ;
 	}
 	return (0);
-}
-
-void	print_parse(t_img *img)
-{
-	int	i;
-
-	i = 0;
-	printf("Textures paths\nN: %s\nS: %s\nW: %s\nE: %s\n",
-		img->n_wall, img->s_wall, img->w_wall, img->e_wall);
-	printf("RGB of floor: %d, %d and %d \nRGB of ceiling: %d, %d and %d\n",
-		img->floor[0], img->floor[1], img->floor[2], img->ceiling[0],
-		img->ceiling[1], img->ceiling[2]);
-	printf("Map:\n");
-	while (img->map->grid[i])
-	{
-		printf("%s\n", img->map->grid[i]);
-		i++;
-	}
-	printf("Posicao x player, %d\n", img->map->player_x);
-	printf("Posicao y player, %d\n", img->map->player_y);
 }

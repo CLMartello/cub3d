@@ -6,7 +6,7 @@
 /*   By: clumertz <clumertz@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 19:43:02 by clumertz          #+#    #+#             */
-/*   Updated: 2026/03/31 19:43:05 by clumertz         ###   ########.fr       */
+/*   Updated: 2026/04/04 18:52:28 by clumertz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,12 @@ void	ft_error(t_img	*img, int type_error)
 	else if (type_error == ERR_MALLOC)
 		printf("Error in malloc\n");
 	else if (type_error == ERR_TEXT)
-		printf("No access or missing texture\n");
+		printf("Error in texture\n");
 	else if (type_error == ERR_RGB)
-		printf("No RGB range or missing RGB\n");
+		printf("Error in RGB\n");
 	else if (type_error == ERR_MAP)
-		printf("Invalid map or missing map\n");
-	free_all(img);
+		printf("Error in map\n");
+	if (img)
+		free_all(img);
 	exit(1);
 }

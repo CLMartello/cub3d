@@ -6,7 +6,7 @@
 /*   By: clumertz <clumertz@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 19:42:20 by clumertz          #+#    #+#             */
-/*   Updated: 2026/03/31 19:42:39 by clumertz         ###   ########.fr       */
+/*   Updated: 2026/04/04 19:48:31 by clumertz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,28 +32,26 @@ void	parse_rgb(t_img *img, int *rgb, int pos)
 	int	i;
 
 	i = 0;
-	verify_text(img);
 	while (img->line[pos] != '\0' && i < 3)
 	{
-		while (img->line[pos] == ' ' || img->line[pos] == ',')
+		while (ft_isspace(img->line[pos]) == 1 || img->line[pos] == ',')
 			pos++;
 		if (img->line[pos] >= '0' && img->line[pos] <= '9')
 		{
 			rgb[i] = ft_atoi(img->line + pos);
+			if (rgb[i] > 255)
+				ft_error(img, ERR_RGB);
 			i++;
 			while (img->line[pos] >= '0' && img->line[pos] <= '9')
 				pos++;
 		}
 		else
-			break ;
-	}
-	i = 0;
-	while (i < 3)
-	{
-		if (rgb[i] == -1 || rgb[i] > 255)
 			ft_error(img, ERR_RGB);
-		i++;
 	}
+	while (ft_isspace(img->line[pos]) == 1)
+		pos++;
+	if (i != 3 || (img->line[pos] != '\0' && img->line[pos] != '\n'))
+		ft_error(img, ERR_RGB);
 }
 
 void	parse_texture(t_img *img, int pos)
@@ -81,7 +79,7 @@ void	parse_texture(t_img *img, int pos)
 		img->e_wall = path;
 }
 
-void	verify_conf(t_img *img)
+void	get_conf(t_img *img)
 {
 	int	i;
 

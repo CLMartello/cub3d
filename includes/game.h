@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: clumertz <clumertz@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/09 15:19:08 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/04/03 18:55:13 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/04/04 19:05:12 by clumertz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int		ft_exitgame(t_game *game);
 /*                                  Parser Func                               */
 /* ************************************************************************** */
 
-void	verify_text(t_img *img);
+void	verify_conf(t_img *img);
 void	verify_arg(char *line);
 void	parse_cub_file(char *file, t_img *img);
 void	start_map(t_img *img);
@@ -65,7 +65,7 @@ t_img	*init_struct(void);
 
 /* Parse conf */
 
-void	verify_conf(t_img *img);
+void	get_conf(t_img *img);
 void	parse_texture(t_img *img, int pos);
 void	parse_rgb(t_img *img, int *rgb, int pos);
 

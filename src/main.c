@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: clumertz <clumertz@student.42porto.com>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/04/04 18:29:44 by clumertz          #+#    #+#             */
+/*   Updated: 2026/04/04 18:29:47 by clumertz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
@@ -11,7 +22,6 @@ int	main(int argc, char **argv)
 	verify_arg(argv[1]);
 	img = init_struct();
 	parse_cub_file(argv[1], img);
-	//print_parse(img);
 	if (init_game(&game, img))
 	{
 		free_all(img);
