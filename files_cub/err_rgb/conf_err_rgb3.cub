@@ -1,18 +1,11 @@
-F 220,100,0
-
-
 NO ./textures/no.xpm
 SO ./textures/so.xpm
-
-C 225,30,111          
 WE ./textures/we.xpm
 EA ./textures/ea.xpm
 
+F 220,100,11
+C 225,30,0,25
 
-
-
-111111
-100001
-10N001
-100001
-111111
+111
+1N1
+111
