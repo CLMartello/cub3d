@@ -6,55 +6,76 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 16:17:27 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/04/01 14:43:21 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/04/03 19:01:13 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 #include "../includes/structs.h"
 
-static void	draw_line(t_player *player, t_game *game, float start_x, int i);
+static void	init_ray(t_player *p, t_ray *ray);
 
+/*Starts the drawing process
+Gathers ray casting info
+Calls DDA*/
 int	draw_loop(t_game *game)
 {
-	t_player	*player;
-	float		fraction;
-	float		start_x;
+	t_player	*p;
+	t_ray		ray;
 	int			i;
 
 	if (!game)
 		return (-1);
-	player = &game->player;
-	move_player(player, game);
+	p = &game->player;
+	init_ray(p, &ray);
+	move_player(p, game);
 	draw_background(game);
-	fraction = PI / 3 / WIDTH;
-	start_x = player->angle - PI / 6;
 	i = 0;
 	while (i < WIDTH)
 	{
-		draw_line(player, game, start_x, i);
-		start_x += fraction;
+		ray.camera = 2.0f * i / (float)WIDTH - 1.0f;
+		ray.ray_dir_x = ray.dir_x + ray.plane_x * ray.camera;
+		ray.ray_dir_y = ray.dir_y + ray.plane_y * ray.camera;
+		dda(game, &ray, i);
 		i++;
 	}
 	mlx_put_image_to_window(game->mlx, game->win, game->img, 0, 0);
+	p = NULL;
 	return (0);
 }
 
-static void	draw_line(t_player *player, t_game *game, float start_x, int i)
+/*Draws the floor and the ceiling*/
+void	draw_background(t_game *game)
 {
-	float	cos_angle;
-	float	sin_angle;
-	float	ray_x;
-	float	ray_y;
+	int	y;
+	int	x;
 
-	cos_angle = cos(start_x);
-	sin_angle = sin(start_x);
-	ray_x = player->x;
-	ray_y = player->y;
-	while (!touch(ray_x, ray_y, game))
+	if (!game || !game->img_struct || !game->img_struct->floor || \
+!game->img_struct->ceiling)
+		return ;
+	y = -1;
+	while (++y < HEIGHT)
 	{
-		ray_x += cos_angle;
-		ray_y += sin_angle;
+		if (y < HEIGHT / 2)
+		{
+			x = -1;
+			while (++x < WIDTH)
+				put_pixel(game, x, y, game->img_struct->floor);
+		}
+		else
+		{
+			x = -1;
+			while (++x < WIDTH)
+				put_pixel(game, x, y, game->img_struct->ceiling);
+		}
 	}
-	draw_pov(game, ray_x, ray_y, i);
+}
+
+/*Initializes the ray casted by the player*/
+static void	init_ray(t_player *p, t_ray *ray)
+{
+	ray->dir_x = cosf(p->angle);
+	ray->dir_y = sinf(p->angle);
+	ray->plane_x = -(ray->dir_y) * 0.66f;
+	ray->plane_y = ray->dir_x * 0.66f;
 }

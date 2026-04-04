@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 16:01:43 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/03/31 20:05:41 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/04/03 18:58:31 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ enum e_erro_identifier
 	ERR_TEXT,
 	ERR_RGB,
 	ERR_MAP,
+	ERR_GAME,
+	ERR_WALL_TEX,
 };
 
 enum e_player_orientation_identifier
@@ -38,8 +40,6 @@ enum e_player_orientation_identifier
 /* ************************************************************************** */
 /*                                  Structs                                   */
 /* ************************************************************************** */
-
-
 
 typedef struct s_map
 {
@@ -64,6 +64,8 @@ typedef struct s_img
 	t_map	*map;
 }		t_img;
 
+/*Holds the player's info*/
+
 typedef struct s_player
 {
 	float	x;
@@ -77,6 +79,67 @@ typedef struct s_player
 	bool	right_rotate;
 }	t_player;
 
+/*Holds the texture's info*/
+
+typedef struct s_tex
+{
+	void	*img;
+	char	*data;
+	int		width;
+	int		height;
+	int		bpp;
+	int		size_line;
+}	t_tex;
+
+/*Holds the cast ray's info*/
+
+typedef struct s_ray
+{
+	float	dir_x;
+	float	dir_y;
+	float	plane_x;
+	float	plane_y;
+	float	camera;
+	float	ray_dir_x;
+	float	ray_dir_y;
+}	t_ray;
+
+/*Holds the info for column calculations*/
+
+typedef struct s_column
+{
+	t_tex	*tex;
+	float	wall_x;
+	int		line_height;
+	int		start;
+	int		end;
+	int		tex_x;
+	int		tex_y;
+	int		color[3];
+	int		y;
+	int		tex_index;
+}	t_column;
+
+/*Holds the info for DDA calculations*/
+
+typedef struct s_dda
+{
+	int		map_x;
+	int		map_y;
+	int		step_x;
+	int		step_y;
+	int		side;
+	float	pos_x;
+	float	pos_y;
+	float	side_dist_x;
+	float	side_dist_y;
+	float	delta_dist_x;
+	float	delta_dist_y;
+	float	perp_dist;
+}	t_dda;
+
+/*Game loop master struct*/
+
 typedef struct s_game
 {
 	void		*mlx;
@@ -88,6 +151,10 @@ typedef struct s_game
 	int			endian;
 	char		**map;
 	t_player	player;
+	t_tex		*n_wall;
+	t_tex		*s_wall;
+	t_tex		*e_wall;
+	t_tex		*w_wall;
 	t_img		*img_struct;
 }	t_game;
 
