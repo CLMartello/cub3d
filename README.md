@@ -12,17 +12,25 @@ The goal is to create a dynamic view where the user can navigate through a maze 
 
 ## Compilation
 The project includes a Makefile that compiles the source files using the -Wall, -Wextra, and -Werror flags.
+
 To compile the mandatory part:
+
+```bash
 make
-To compile with bonuses (if applicable):
-make bonus
+```
+
 Other available rules:
+
+```bash
 clean: Removes object files.
 fclean: Removes object files and the compiled executable.
 re: Recompiles the entire project.
+```
+
 ## Execution
 The program requires a scene description file with the .cub extension as its only argument:
 ./cub3D path_to_map.cub
+
 ## Controls
 W, A, S, D: Move the point of view through the maze.
 Left/Right Arrows: Rotate the camera view.
@@ -35,12 +43,19 @@ Red Cross: Clicking the window's close button also exits the program cleanly.
 Digital Differential Analyzer (DDA) - Wikipedia
 The DDA Algorithm, Explained Interactively
 Lode's Computer Graphics Tutorial - Raycasting
+
 ## AI Usage
 AI was utilized in this project for the following tasks:
 Technical Explanations: Assisting in the conceptual breakdown of the Digital Differential Analyzer (DDA) implementation.
+
 Documentation: Generating the project's README.md and clarifying specific algorithm steps.
+
 ## Technical Highlights
 DDA Algorithm: Used for infinite precision in wall detection on a 2D grid, avoiding the "skipping" issues found in constant-step algorithms.
+
 Vector-Based Camera: Implementation of a 2D camera using direction and plane vectors instead of Euclidean angles for more efficient rotations.
+
 Fisheye Prevention: Distance is calculated perpendicular to the camera plane rather than directly to the player, ensuring walls appear flat and straight.
+
 MiniLibX: All graphical rendering is handled through the miniLibX library, managing window events and pixel-level display.
+
