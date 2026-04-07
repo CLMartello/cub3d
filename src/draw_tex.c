@@ -6,7 +6,7 @@
 /*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 16:20:41 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/04/03 19:06:23 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/04/07 17:34:00 by adpinhei         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,9 @@ static void	draw_column(t_column *c, t_game *game, int col)
 			c->tex_y = c->tex->height - 1;
 		c->tex_index = c->tex_y * c->tex->size_line + \
 c->tex_x * c->tex->bpp / 8;
-		c->color[0] = (unsigned char)c->tex->data[c->tex_index + 2];
+		c->color[0] = (unsigned char)c->tex->data[c->tex_index];
 		c->color[1] = (unsigned char)c->tex->data[c->tex_index + 1];
-		c->color[2] = (unsigned char)c->tex->data[c->tex_index];
+		c->color[2] = (unsigned char)c->tex->data[c->tex_index + 2];
 		put_pixel(game, col, c->y, c->color);
 		c->y++;
 	}

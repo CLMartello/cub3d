@@ -6,7 +6,7 @@
 #    By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/26 15:24:18 by adpinhei          #+#    #+#              #
-#    Updated: 2026/04/04 18:17:46 by clumertz         ###   ########.fr        #
+#    Updated: 2026/04/07 17:31:00 by adpinhei         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ NAME := cub3D
 
 CC := cc
 
-PARAM := files_cub/conf_ok3.cub
+PARAM := files_cub/conf_ok5.cub
 
 ###############################################################################
 #                                mlx Flags                                    #
