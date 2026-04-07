@@ -33,15 +33,20 @@ The program requires a scene description file with the .cub extension as its onl
 
 ## Controls
 W, A, S, D: Move the point of view through the maze.
+
 Left/Right Arrows: Rotate the camera view.
+
 ESC: Close the window and quit the program.
+
 Red Cross: Clicking the window's close button also exits the program cleanly.
 
 # Resources
 
 ## References
 Digital Differential Analyzer (DDA) - Wikipedia
+
 The DDA Algorithm, Explained Interactively
+
 Lode's Computer Graphics Tutorial - Raycasting
 
 ## AI Usage
