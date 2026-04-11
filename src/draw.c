@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: adpinhei <adpinhei@student.42.fr>          +#+  +:+       +#+        */
+/*   By: clumertz <clumertz@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 16:17:27 by adpinhei          #+#    #+#             */
-/*   Updated: 2026/04/03 19:01:13 by adpinhei         ###   ########.fr       */
+/*   Updated: 2026/04/11 16:51:01 by clumertz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ void	draw_background(t_game *game)
 		{
 			x = -1;
 			while (++x < WIDTH)
-				put_pixel(game, x, y, game->img_struct->floor);
+				put_pixel(game, x, y, game->img_struct->ceiling);
 		}
 		else
 		{
 			x = -1;
 			while (++x < WIDTH)
-				put_pixel(game, x, y, game->img_struct->ceiling);
+				put_pixel(game, x, y, game->img_struct->floor);
 		}
 	}
 }
